@@ -1,4 +1,4 @@
-google.charts.load("current", { packages: ["corechart"] });
+google.charts.load("current", { packages: ["corechart",'bar'] });
 google.charts.load("current", { packages: ["calendar"] });
 const form = document.querySelector('#searchForm');
 var langUsed = {};
@@ -10,6 +10,7 @@ var ratingUser = [];
 var rankArr = [];
 var labelR=[];
 var problemRating=[];
+
 
 var langUsed2= {};
 var verdict2= {};
@@ -25,6 +26,7 @@ form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const handle = form.elements.query.value;
     const handle2= form.elements.query2.value;
+    // console.log(handle2);
 
     try {
         const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
@@ -36,7 +38,14 @@ form.addEventListener('submit', async function (e) {
         const userRating2 = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle2}`);
         //const problemSet = await axios.get(`https://codeforces.com/api/problemset.problems?tags=${handle}`);
 
-        //console.log(userStatus.data);
+       
+        var currentRating=userInfo.data.result[0].rating;
+        var maxRating=userInfo.data.result[0].maxRating;
+
+        var currentRating2=userInfo2.data.result[0].rating;
+        var maxRating2=userInfo2.data.result[0].maxRating;
+
+        // console.log(currentRating);
 
         for (var i = 0; i < userStatus.data.result.length; i++) {
             var sub = userStatus.data.result[i];
@@ -140,142 +149,170 @@ form.addEventListener('submit', async function (e) {
             }
         }
         
-
+        // console.log(currentRating);
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-            //----- start of variable 1-----------// 
-            var data1 = new google.visualization.DataTable();
-            data1.addColumn('string', 'language');
-            data1.addColumn('number', 'countOfLanguage');
-            for (var lang in langUsed) {
-                data1.addRow([lang, langUsed[lang]]);
-            }
-            //set options
-            var option1 = {
-                'title': 'languages used by user',
-                'width': 400,
-                'height': 300
-            };
+        var data1 = google.visualization.arrayToDataTable([
+          ['Rating', 'current', 'max'],
+          [handle, currentRating, maxRating],
+          [handle2, currentRating2, maxRating2],
+        ]);
+          var classicOptions = {
+          width: 900,
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          title: 'Current and max rating of both users',
+          vAxes: {
+            // Adds titles to each axis.
+            0: {title: 'rating'},
+            1: {title: 'user'}
+          }
+        };
+        function drawClassicChart() {
+          var classicChart = new google.visualization.ColumnChart(chartDiv_1);
+          classicChart.draw(data1, classicOptions);
+        }
 
-            // Instantiate and draw our chart, passing in some options.
-            var chart1 = new google.visualization.PieChart(document.getElementById('chart_1'));
-            chart1.draw(data1, option1);
-            //----- end of variable-----------// 
+        drawClassicChart();
 
-            //----- start of variable 2-----------// 
-            var data2 = new google.visualization.DataTable();
-            data2.addColumn('string', 'verdict');
-            data2.addColumn('number', 'countOfVerdict');
-            for (var verd in verdict) {
-                data2.addRow([verd, verdict[verd]]);
-            }
+        }
 
-            var option2 = {
-                'title': 'Verdicts by user',
-                'width': 400,
-                'height': 300
-            };
+        // function drawChart() {
+        //     //----- start of variable 1-----------// 
+        //     var data1 = new google.visualization.DataTable();
+        //     data1.addColumn('string', 'language');
+        //     data1.addColumn('number', 'countOfLanguage');
+        //     for (var lang in langUsed) {
+        //         data1.addRow([lang, langUsed[lang]]);
+        //     }
+        //     //set options
+        //     var option1 = {
+        //         'title': 'languages used by user',
+        //         'width': 400,
+        //         'height': 300
+        //     };
 
-            // Instantiate and draw our chart, passing in some options.
-            var chart2 = new google.visualization.PieChart(document.getElementById('chart_2'));
-            chart2.draw(data2, option2);
-            //----- end of variable-----------// 
+        //     // Instantiate and draw our chart, passing in some options.
+        //     var chart1 = new google.visualization.PieChart(document.getElementById('chart_1'));
+        //     chart1.draw(data1, option1);
+        //     //----- end of variable-----------// 
 
-            //----- start of variable 3-----------// 
-            var data3 = new google.visualization.DataTable();
-            data3.addColumn('string', 'Tag');
-            data3.addColumn('number', 'countOfTag');
-            for (var tag in problemTag) {
-                data3.addRow([tag, problemTag[tag]]);
-            }
-            //set options
-            var option3 = {
-                'title': 'problem tags solved used by user',
-                'width': 400,
-                'height': 300
-            };
-            // Instantiate and draw our chart, passing in some options.
-            var chart3 = new google.visualization.PieChart(document.getElementById('chart_3'));
-            chart3.draw(data3, option3);
-            //----- end of variable-----------// 
+        //     //----- start of variable 2-----------// 
+        //     var data2 = new google.visualization.DataTable();
+        //     data2.addColumn('string', 'verdict');
+        //     data2.addColumn('number', 'countOfVerdict');
+        //     for (var verd in verdict) {
+        //         data2.addRow([verd, verdict[verd]]);
+        //     }
+
+        //     var option2 = {
+        //         'title': 'Verdicts by user',
+        //         'width': 400,
+        //         'height': 300
+        //     };
+
+        //     // Instantiate and draw our chart, passing in some options.
+        //     var chart2 = new google.visualization.PieChart(document.getElementById('chart_2'));
+        //     chart2.draw(data2, option2);
+        //     //----- end of variable-----------// 
+
+        //     //----- start of variable 3-----------// 
+        //     var data3 = new google.visualization.DataTable();
+        //     data3.addColumn('string', 'Tag');
+        //     data3.addColumn('number', 'countOfTag');
+        //     for (var tag in problemTag) {
+        //         data3.addRow([tag, problemTag[tag]]);
+        //     }
+        //     //set options
+        //     var option3 = {
+        //         'title': 'problem tags solved used by user',
+        //         'width': 400,
+        //         'height': 300
+        //     };
+        //     // Instantiate and draw our chart, passing in some options.
+        //     var chart3 = new google.visualization.PieChart(document.getElementById('chart_3'));
+        //     chart3.draw(data3, option3);
+        //     //----- end of variable-----------// 
 
 
-            var dataTable = new google.visualization.DataTable();
-            dataTable.addColumn({ type: 'date', id: 'Date' });
-            dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
-            var years;
-            for (var i in date) {
-                var value = date[i];
-                var ms = i * 1000;
-                var d1 = new Date(ms);
-                if (years === undefined) {
-                    years = 2022 - d1.getFullYear();
-                }
-                dataTable.addRow([new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()), value]);
-            }
-            if (years === undefined) {
-                years = 1;
-            }
-            var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
-            var options = {
-                title: "Submissions",
-                height: years * 140 + 30,
-                width: 1000,
-                colorAxis: {
-                    minValue: 0,
-                    colors: ['#ffffff', '#0027ff', '#00127d']
-                },
-                calendar: {
-                    cellSize: 15
-                }
-            };
-            chart.draw(dataTable, options);
+        //     var dataTable = new google.visualization.DataTable();
+        //     dataTable.addColumn({ type: 'date', id: 'Date' });
+        //     dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+        //     var years;
+        //     for (var i in date) {
+        //         var value = date[i];
+        //         var ms = i * 1000;
+        //         var d1 = new Date(ms);
+        //         if (years === undefined) {
+        //             years = 2022 - d1.getFullYear();
+        //         }
+        //         dataTable.addRow([new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()), value]);
+        //     }
+        //     if (years === undefined) {
+        //         years = 1;
+        //     }
+        //     var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+        //     var options = {
+        //         title: "Submissions",
+        //         height: years * 140 + 30,
+        //         width: 1000,
+        //         colorAxis: {
+        //             minValue: 0,
+        //             colors: ['#ffffff', '#0027ff', '#00127d']
+        //         },
+        //         calendar: {
+        //             cellSize: 15
+        //         }
+        //     };
+        //     chart.draw(dataTable, options);
 
 
 
             
  
            
-                  //console.log(data.result[0]);
+        //           //console.log(data.result[0]);
                 
-         for(var i=0;i<userRating.data.result.length;i++)
-            {
-               var sub=userRating.data.result[i];
-               var rating=sub.newRating;
-               ratingUser[i]=rating;
-               var label=sub.ratingUpdateTimeSeconds;
-               labelR[i]=label;
-               var rank=sub.rank;
-               rankArr[i]=rank;
-            }
+        //  for(var i=0;i<userRating.data.result.length;i++)
+        //     {
+        //        var sub=userRating.data.result[i];
+        //        var rating=sub.newRating;
+        //        ratingUser[i]=rating;
+        //        var label=sub.ratingUpdateTimeSeconds;
+        //        labelR[i]=label;
+        //        var rank=sub.rank;
+        //        rankArr[i]=rank;
+        //     }
   
-        var data4 = new google.visualization.DataTable();
-           data4.addColumn('date', 'label');
-           data4.addColumn('number', 'rating');
-           for(var x in ratingUser){
-            	data4.addRow([new Date(labelR[x]*1000),ratingUser[x]]);
-           }
-        var option4 = {'title':'Rating over time',
-                          'width':900,
-                          'height':500};
-        var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
-        chart4.draw(data4, option4);
+        // var data4 = new google.visualization.DataTable();
+        //    data4.addColumn('date', 'label');
+        //    data4.addColumn('number', 'rating');
+        //    for(var x in ratingUser){
+        //     	data4.addRow([new Date(labelR[x]*1000),ratingUser[x]]);
+        //    }
+        // var option4 = {'title':'Rating over time',
+        //                   'width':900,
+        //                   'height':500};
+        // var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
+        // chart4.draw(data4, option4);
   
         
         
-        var data5 = new google.visualization.DataTable();
-        data5.addColumn('date', 'label');
-        data5.addColumn('number', 'rating');
-        for(var x in ratingUser)
-            {
-            	data5.addRow([new Date(labelR[x]*1000),rankArr[x]]);
-            }
-        var option5 = {'title':'Rank over time',
-                          'width':900,
-                          'height':500};
-        var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
-        chart5.draw(data5, option5);
+        // var data5 = new google.visualization.DataTable();
+        // data5.addColumn('date', 'label');
+        // data5.addColumn('number', 'rating');
+        // for(var x in ratingUser)
+        //     {
+        //     	data5.addRow([new Date(labelR[x]*1000),rankArr[x]]);
+        //     }
+        // var option5 = {'title':'Rank over time',
+        //                   'width':900,
+        //                   'height':500};
+        // var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
+        // chart5.draw(data5, option5);
 
         
 
@@ -283,29 +320,29 @@ form.addEventListener('submit', async function (e) {
 
 
 
-        var data7 = new google.visualization.DataTable();
-        data7.addColumn('string', 'Problem_Rating');
-        data7.addColumn('number', 'Number_Of_Such_Rating');
-        for (var x in problemRating) {
-            data7.addRow([x, problemRating[x]]);
-        }
-        //set options
-        var option7 = {
-            'title': 'Problem Ratings',
-            'width': 600,
-            'height': 800
+        // var data7 = new google.visualization.DataTable();
+        // data7.addColumn('string', 'Problem_Rating');
+        // data7.addColumn('number', 'Number_Of_Such_Rating');
+        // for (var x in problemRating) {
+        //     data7.addRow([x, problemRating[x]]);
+        // }
+        // //set options
+        // var option7 = {
+        //     'title': 'Problem Ratings',
+        //     'width': 600,
+        //     'height': 800
 
-        };
-        // Instantiate and draw our chart, passing in some options.
-        var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
-        chart7.draw(data7, option7);
+        // };
+        // // Instantiate and draw our chart, passing in some options.
+        // var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
+        // chart7.draw(data7, option7);
          
         
 
 
 
                
-        }
+        // }
     } catch (error) {
         alert("User not found !!!");
     }
