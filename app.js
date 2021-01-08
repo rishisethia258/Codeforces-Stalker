@@ -4,13 +4,8 @@ const form = document.querySelector('#searchForm');
 var langUsed = {};
 var verdict = {};
 var problemTag = {};
-var tagAccuracy = {};
 var date = {};
 var heat = [];
-var problems = {};
-var tried = 0;
-var Solved = 0;
-
 
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -18,7 +13,7 @@ form.addEventListener('submit', async function (e) {
     try {
         const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
         const userStatus = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
-        console.log(userStatus.data);
+
         // console.log(userStatus.data);
 
         for (var i = 0; i < userStatus.data.result.length; i++) {
@@ -51,29 +46,12 @@ form.addEventListener('submit', async function (e) {
 
             var tags = sub.problem.tags;
             for (var k = 0; k < tags.length; k++) {
-                if (sub.verdict === "OK") {
-                    if (tagAccuracy[tags[k]] === undefined) {
-                        tagAccuracy[tags[k]] = 1;
-                    } else {
-                        tagAccuracy[tags[k]]++;
-                    }
-                }
                 if (problemTag[tags[k]] === undefined) {
                     problemTag[tags[k]] = 1;
                 } else {
                     problemTag[tags[k]]++;
                 }
             }
-        }
-
-        for (i in tagAccuracy) {
-            if (problemTag[i] != 0) {
-                tagAccuracy[i] /= problemTag[i];
-                tagAccuracy[i] *= 100;
-            } else {
-                tagAccuracy[i] = 0;
-            }
-            console.log(i, tagAccuracy[i]);
         }
 
         google.charts.setOnLoadCallback(drawChart);
