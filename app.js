@@ -6,6 +6,10 @@ var verdict = {};
 var problemTag = {};
 var date = {};
 var heat = [];
+var ratingUser = [];
+var rankArr = [];
+var labelR=[];
+var problemRating=[];
 
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -13,12 +17,14 @@ form.addEventListener('submit', async function (e) {
     try {
         const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
         const userStatus = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
+        const userRating = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`);
+        //const problemSet = await axios.get(`https://codeforces.com/api/problemset.problems?tags=${handle}`);
 
-        // console.log(userStatus.data);
+        //console.log(userStatus.data);
 
         for (var i = 0; i < userStatus.data.result.length; i++) {
             var sub = userStatus.data.result[i];
-
+       
             var unixTime = sub.creationTimeSeconds;
             var ms = unixTime * 1000;
             var d1 = new Date(ms);
@@ -52,7 +58,21 @@ form.addEventListener('submit', async function (e) {
                     problemTag[tags[k]]++;
                 }
             }
+
+
+
+
+           var rating=sub.problem.rating;
+           if(ver=="OK" && rating!=undefined){
+               if(problemRating[rating] === undefined){
+                   problemRating[rating]=1;
+               }
+               else {
+                   problemRating[rating]++;
+               }
+            }
         }
+        
 
         google.charts.setOnLoadCallback(drawChart);
 
@@ -144,6 +164,80 @@ form.addEventListener('submit', async function (e) {
                 }
             };
             chart.draw(dataTable, options);
+
+
+
+            
+ 
+           
+                  //console.log(data.result[0]);
+                
+         for(var i=0;i<userRating.data.result.length;i++)
+            {
+               var sub=userRating.data.result[i];
+               var rating=sub.newRating;
+               ratingUser[i]=rating;
+               var label=sub.ratingUpdateTimeSeconds;
+               labelR[i]=label;
+               var rank=sub.rank;
+               rankArr[i]=rank;
+            }
+  
+        var data4 = new google.visualization.DataTable();
+           data4.addColumn('date', 'label');
+           data4.addColumn('number', 'rating');
+           for(var x in ratingUser){
+            	data4.addRow([new Date(labelR[x]*1000),ratingUser[x]]);
+           }
+        var option4 = {'title':'Rating over time',
+                          'width':900,
+                          'height':500};
+        var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
+        chart4.draw(data4, option4);
+  
+        
+        
+        var data5 = new google.visualization.DataTable();
+        data5.addColumn('date', 'label');
+        data5.addColumn('number', 'rating');
+        for(var x in ratingUser)
+            {
+            	data5.addRow([new Date(labelR[x]*1000),rankArr[x]]);
+            }
+        var option5 = {'title':'Rank over time',
+                          'width':900,
+                          'height':500};
+        var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
+        chart5.draw(data5, option5);
+
+        
+
+       
+
+
+
+        var data7 = new google.visualization.DataTable();
+        data7.addColumn('string', 'Problem_Rating');
+        data7.addColumn('number', 'Number_Of_Such_Rating');
+        for (var x in problemRating) {
+            data7.addRow([x, problemRating[x]]);
+        }
+        //set options
+        var option7 = {
+            'title': 'Problem Ratings',
+            'width': 600,
+            'height': 800
+
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
+        chart7.draw(data7, option7);
+         
+        
+
+
+
+               
         }
     } catch (error) {
         alert("User not found !!!");
