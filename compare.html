@@ -16,25 +16,93 @@
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-	<h1>Compare two handles</h1>
-	<form id="searchForm1">
-		<div>
-			<input type="text" placeholder="Enter 1st Handle" name="query">
-			<input type="text" placeholder="Enter 2nd Handle" name="query2">
-		</div>
-		<button>Compare</button>
-	</form>
+	<nav class="navbar navbar-expand-lg navbar-dark container-fluid" style="background-color: #0d1d78;">
+        <a class="navbar-brand" href="#">Codeforces Guide</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="index.html">Analyze</span></a>
+                <a class="nav-item nav-link active" href="compare.html">Compare</a>
+                <a class="nav-item nav-link" href="#">Extra</a>
+            </div>
+        </div>
+    </nav>
 
-	<div id="chartDiv_1" style="width: 800px; height: 500px;"></div>
-	<div id="chartDiv_2" style="width: 800px; height: 500px;"></div>
-	<div id="chart_4"></div>
-	<div id="chart_5"></div>
-	<div id="chart_7"></div>
-	<div id="chart_8" style="width: 1300px; height: 500px;"></div>
-	<table class="table d-none container" id="compareTable">
+    <div class="container">
+        <div class="jumbotron text-center pt-5">
+            <h1>Compare two user handles</h1>
+            <p>Enter two user handles to<br> compare and analyze the difference</p>
+        </div>
+        <div class="pb-3 pt-3">
+            <form id="searchForm1">
+                <div class="mb-3">
+                    <input class="form-control formMargin" type="text" placeholder="Enter 1st Handle" name="query">
+					<input class="form-control formMargin" type="text" placeholder="Enter 2nd Handle" name="query2">
+                </div>
+
+                <div>
+                    <button class="btn btn-light">Submit</button>
+                </div>
+            </form>
+        </div>
+
+         <div id="vis" class="d-none">
+        
+        	<div class="m-5">
+        		
+        		<div class="row">
+                    <div class="card pie1" id="card1">
+                        <div class="card-body">
+                            <div id="chart_1"></div>
+                        </div>
+                    </div>
+                    <div class="card pie1" id="card2">
+                        <div class="card-body">
+                            <div id="chart_2"></div>
+                        </div>
+                    </div>
+         		</div>
+        	</div>
+        	 <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_4"></div>
+                        </div>
+                    </div>
+             </div>
+              <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_5"></div>
+                        </div>
+                    </div>
+             </div>
+              <div class="row">
+                    <div class="card m-auto" id="card5">
+                        <div class="card-body">
+                            <div id="chart_7"></div>
+                        </div>
+                    </div>
+             </div>
+             <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_8"></div>
+                        </div>
+                    </div>
+             </div>
+       
+       <div class="row">
+                  <div class="bgColor m-auto card p-5">
+                    	<h1>Some Numbers</h1>
+       <table class="table container" id="compareTable">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -80,6 +148,15 @@
 			</tr>
 		</tbody>
 	</table>
+</div>
+</div>
+</div>
+         
+
+    </div>
+<!--  -->
+
+	
 	<script src="twoUsers.js"></script>
 </body>
 
