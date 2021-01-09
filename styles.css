@@ -86,3 +86,25 @@ body {
     font-weight: bold;
 }
 
+
+#footer{
+    padding-top: 10px;
+   padding-left: 20px;
+   background: #ccd1d4;
+   color: #0e0e0c;
+   height: 50px;
+   display: grid;
+   grid-template-columns: 1.2fr 1fr;
+}
+#About_Us{
+    padding-top: -10px;
+}
+.footlink{
+    color:#0f0e0e;
+    margin: 10px;
+}
+
+main{
+    min-height: 100vh;
+}
+
