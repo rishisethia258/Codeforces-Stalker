@@ -1,30 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>compare page</title>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-</head>
-<body>
-    <h1>Compare two handles</h1>
-    <form id="searchForm1">
-        <div>
-            <input type="text" placeholder="Enter 1st Handle" name="query">
-            <input type="text" placeholder="Enter 2nd Handle" name="query2">
-        </div>
-        <button>Compare</button>
-    </form>
 
-     <div id="chartDiv_1" style="width: 800px; height: 500px;"></div>
-     <div id="chartDiv_2" style="width: 800px; height: 500px;"></div>
-     <div id="chart_4"></div>
-     <div id="chart_5"></div>
-     <div id="chart_7"></div>
-    <div id="chart_8" style="width: 1300px; height: 500px;"></div>
- <script src="twoUsers.js"></script>
+<head>
+	<title>compare page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+	<h1>Compare two handles</h1>
+	<form id="searchForm1">
+		<div>
+			<input type="text" placeholder="Enter 1st Handle" name="query">
+			<input type="text" placeholder="Enter 2nd Handle" name="query2">
+		</div>
+		<button>Compare</button>
+	</form>
+
+	<div id="chartDiv_1" style="width: 800px; height: 500px;"></div>
+	<div id="chartDiv_2" style="width: 800px; height: 500px;"></div>
+	<div id="chart_4"></div>
+	<div id="chart_5"></div>
+	<div id="chart_7"></div>
+	<div id="chart_8" style="width: 1300px; height: 500px;"></div>
+	<table class="table d-none container" id="compareTable">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th id="handle1"></th>
+				<th id="handle2"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Problems Tried</th>
+				<td id="tried1"></td>
+				<td id="tried2"></td>
+			</tr>
+			<tr>
+				<th>Problems Solved</th>
+				<td id="solved1"></td>
+				<td id="solved2"></td>
+			</tr>
+			<tr>
+				<th>Problems Unsolved</th>
+				<td id="unsolved1"></td>
+				<td id="unsolved2"></td>
+			</tr>
+			<tr>
+				<th>Average Attempts for Solving a Question</th>
+				<td id="avgAttempts1"></td>
+				<td id="avgAttempts2"></td>
+			</tr>
+			<tr>
+				<th>Questions solved with one Submission</th>
+				<td id="oneSub1"></td>
+				<td id="oneSub2"></td>
+			</tr>
+			<tr>
+				<th>Best Rank</th>
+				<td id="bestRank1"></td>
+				<td id="bestRank2"></td>
+			</tr>
+			<tr>
+				<th>Worst Rank</th>
+				<td id="worstRank1"></td>
+				<td id="worstRank2"></td>
+			</tr>
+		</tbody>
+	</table>
+	<script src="twoUsers.js"></script>
 </body>
+
 </html>
