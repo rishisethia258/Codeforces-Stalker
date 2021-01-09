@@ -1,5 +1,5 @@
 body {
-    background-color: #0a1552;
+    background-color: #6495ED;
     color :white;
 }
 
@@ -7,7 +7,8 @@ body {
     margin-top: 2rem;
     padding: 2rem 1rem;
     margin-bottom: 2rem;
-    background-color: #95a3f0;
+    /*background-color: #95a3f0;*/
+    background-color: #DDDDDD;
     border-radius: .3rem;
     color : #0a1552;
 }
@@ -17,14 +18,27 @@ body {
     margin-right: 25%;
     margin-left: 25%;
 }
+.formMargin {
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .btn-outline-primary {
+    width:25%;
+    margin-right: 37%;
+    margin-left: 37%;
+}
+.btn-light {
     width:25%;
     margin-right: 37%;
     margin-left: 37%;
 }
 
 .card {
-    background-color: #95a3f0;
+    /*background-color: #95a3f0;*/
+    background-color: #DDDDDD;
     color: white;
     border-radius: 5%;
 }
@@ -50,7 +64,8 @@ body {
     margin-left: 3.75%;
 }
 .bgColor {
-    background-color: #95a3f0;
+    /*background-color: #95a3f0;*/
+    background-color: #DDDDDD;
     color: black;
 }
 
