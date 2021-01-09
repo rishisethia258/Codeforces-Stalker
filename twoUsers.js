@@ -159,7 +159,8 @@ form.addEventListener('submit', async function (e) {
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
-        //column graph of rating, max rating
+       
+         //column graph of rating, max rating
         var data1 = google.visualization.arrayToDataTable([
           ['Rating', handle, handle2],
           ["current rating", currentRating, currentRating2],
@@ -218,104 +219,7 @@ form.addEventListener('submit', async function (e) {
         }
         drawClassicChart();
 
-        
-        //     //----- start of variable 1-----------// 
-        //     var data1 = new google.visualization.DataTable();
-        //     data1.addColumn('string', 'language');
-        //     data1.addColumn('number', 'countOfLanguage');
-        //     for (var lang in langUsed) {
-        //         data1.addRow([lang, langUsed[lang]]);
-        //     }
-        //     //set options
-        //     var option1 = {
-        //         'title': 'languages used by user',
-        //         'width': 400,
-        //         'height': 300
-        //     };
-
-        //     // Instantiate and draw our chart, passing in some options.
-        //     var chart1 = new google.visualization.PieChart(document.getElementById('chart_1'));
-        //     chart1.draw(data1, option1);
-        //     //----- end of variable-----------// 
-
-        //     //----- start of variable 2-----------// 
-        //     var data2 = new google.visualization.DataTable();
-        //     data2.addColumn('string', 'verdict');
-        //     data2.addColumn('number', 'countOfVerdict');
-        //     for (var verd in verdict) {
-        //         data2.addRow([verd, verdict[verd]]);
-        //     }
-
-        //     var option2 = {
-        //         'title': 'Verdicts by user',
-        //         'width': 400,
-        //         'height': 300
-        //     };
-
-        //     // Instantiate and draw our chart, passing in some options.
-        //     var chart2 = new google.visualization.PieChart(document.getElementById('chart_2'));
-        //     chart2.draw(data2, option2);
-        //     //----- end of variable-----------// 
-
-        //     //----- start of variable 3-----------// 
-        //     var data3 = new google.visualization.DataTable();
-        //     data3.addColumn('string', 'Tag');
-        //     data3.addColumn('number', 'countOfTag');
-        //     for (var tag in problemTag) {
-        //         data3.addRow([tag, problemTag[tag]]);
-        //     }
-        //     //set options
-        //     var option3 = {
-        //         'title': 'problem tags solved used by user',
-        //         'width': 400,
-        //         'height': 300
-        //     };
-        //     // Instantiate and draw our chart, passing in some options.
-        //     var chart3 = new google.visualization.PieChart(document.getElementById('chart_3'));
-        //     chart3.draw(data3, option3);
-        //     //----- end of variable-----------// 
-
-
-        //     var dataTable = new google.visualization.DataTable();
-        //     dataTable.addColumn({ type: 'date', id: 'Date' });
-        //     dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
-        //     var years;
-        //     for (var i in date) {
-        //         var value = date[i];
-        //         var ms = i * 1000;
-        //         var d1 = new Date(ms);
-        //         if (years === undefined) {
-        //             years = 2022 - d1.getFullYear();
-        //         }
-        //         dataTable.addRow([new Date(d1.getFullYear(), d1.getMonth(), d1.getDate()), value]);
-        //     }
-        //     if (years === undefined) {
-        //         years = 1;
-        //     }
-        //     var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
-        //     var options = {
-        //         title: "Submissions",
-        //         height: years * 140 + 30,
-        //         width: 1000,
-        //         colorAxis: {
-        //             minValue: 0,
-        //             colors: ['#ffffff', '#0027ff', '#00127d']
-        //         },
-        //         calendar: {
-        //             cellSize: 15
-        //         }
-        //     };
-        //     chart.draw(dataTable, options);
-
-
-
-            
- 
-           
-        //           //console.log(data.result[0]);
-                
-          
-          
+         
           for(var i=0;i<userRating.data.result.length;i++)
              {
                 var sub=userRating.data.result[i];
@@ -389,6 +293,56 @@ form.addEventListener('submit', async function (e) {
          // Instantiate and draw our chart, passing in some options.
          var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
          chart7.draw(data7, option7);
+
+         // var data8 = new google.visualization.DataTable();
+         // data8.addColumn('string', 'Problem_Tag');
+         // data8.addColumn('number', `${handle}`);
+         // data8.addColumn('number',`${handle2}`);
+         // for (var x in problemTag) {
+         //     data8.addRow([x, problemTag[x],problemTag2[x]]);
+         // }
+         // //set options
+         // var option8 = {
+         //     'title': 'Problem Tags',
+         //     'width': 600,
+         //     'height': 2000
+         // };
+         // // Instantiate and draw our chart, passing in some options.
+         // var chart8 = new google.visualization.BarChart(document.getElementById('chart_8'));
+         // chart8.draw(data8, option8);
+
+         //column graph of solved problems by tag
+        var data8 =new google.visualization.DataTable()
+         data8.addColumn('string', 'Problem_Tag');
+         data8.addColumn('number', `${handle}`);
+         data8.addColumn('number',`${handle2}`);
+         for (var x in problemTag) {
+             data8.addRow([x, problemTag[x],problemTag2[x]]);
+         }
+         
+          var classicOptions8 = {
+          width: 1300,
+          series: {
+            0: {targetAxisIndex: 0},
+            // 1: {targetAxisIndex: 1}
+          },
+          title: 'Solver probelms acc to Tag',
+          vAxes: {
+            // Adds titles to each axis.
+            // minValue: 0,
+            0: {title: 'rating'},
+           // 1: {title: 'user'}
+          },
+          vAxis: {
+            minValue: 0,
+            // ticks: [0, .3, .6, .9, 1]
+          }
+        }
+        function drawClassicChart1() {
+          var classicChart8 = new google.visualization.ColumnChart(chart_8);
+          classicChart8.draw(data8, classicOptions8);
+        }
+        drawClassicChart1()
          
          }
     } catch (error) {
