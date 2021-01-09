@@ -1,7 +1,8 @@
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.load("current", { packages: ["calendar"] });
 const form = document.querySelector('#searchForm');
-const table = document.querySelector('#infoTable');
+const table1 = document.querySelector('#table1');
+const table2 = document.querySelector('#table2');
 var langUsed = {};
 var verdict = {};
 var problemTag = {};
@@ -20,6 +21,8 @@ var solvedWithOne = 0;
 var contestGiven = 0;
 var bestRank = 1e10;
 var worstRank = 0;
+var strong = [];
+var weak = [];
 
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -28,7 +31,8 @@ form.addEventListener('submit', async function (e) {
         const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
         const userStatus = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
         const userRating = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`);
-        console.log(userStatus.data);
+        // console.log(userStatus.data);
+
         for (var i = 0; i < userStatus.data.result.length; i++) {
             var sub = userStatus.data.result[i];
 
@@ -131,7 +135,6 @@ form.addEventListener('submit', async function (e) {
             }
         }
         avgAttempts /= solved;
-        // console.log(tried, solved);
 
 
         for (i in tagAccuracy) {
@@ -142,9 +145,84 @@ form.addEventListener('submit', async function (e) {
                 tagAccuracy[i] = 0;
             }
         }
+        var ta = tagAccuracy;
+        google.charts.setOnLoadCallback(drawChart);
 
-        // Building table
-        table.classList.toggle("d-none");
+        var maxi = 0;
+        var ind;
+        for (i in tagAccuracy) {
+            if (tagAccuracy[i] >= maxi) {
+                maxi = tagAccuracy[i];
+                ind = i;
+            }
+        }
+        strong.push(ind);
+        ind = '';
+        maxi = 0;
+        for (i in tagAccuracy) {
+            if (i != strong[0] && tagAccuracy[i] >= maxi) {
+                maxi = tagAccuracy[i];
+                ind = i;
+            }
+        }
+        strong.push(ind);
+        ind = '';
+        maxi = 0;
+        for (i in tagAccuracy) {
+            if (i != strong[0] && i != strong[1] && tagAccuracy[i] >= maxi) {
+                maxi = tagAccuracy[i];
+                ind = i;
+            }
+        }
+        strong.push(ind);
+        ind = '';
+        maxi = 0;
+
+        var mini = 1e10;
+        ind = '';
+        for (i in tagAccuracy) {
+            if (tagAccuracy[i] <= mini) {
+                mini = tagAccuracy[i];
+                ind = i;
+            }
+        }
+        weak.push(ind);
+        ind = '';
+        mini = 1e10;
+        for (i in tagAccuracy) {
+            if (i != weak[0] && tagAccuracy[i] <= mini) {
+                mini = tagAccuracy[i];
+                ind = i;
+            }
+        }
+        weak.push(ind);
+        ind = '';
+        mini = 1e10;
+        for (i in tagAccuracy) {
+            if (i != weak[0] && i != weak[1] && tagAccuracy[i] <= mini) {
+                mini = tagAccuracy[i];
+                ind = i;
+            }
+        }
+        weak.push(ind);
+
+        // Building Strongest Weakest Topic Table
+        table1.classList.toggle("d-none");
+        var stng1 = document.querySelector("#stng-1");
+        stng1.innerText = strong[0];
+        var stng2 = document.querySelector("#stng-2");
+        stng2.innerText = strong[1];
+        var stng3 = document.querySelector("#stng-3");
+        stng3.innerText = strong[2];
+        var weak1 = document.querySelector("#weak-1");
+        weak1.innerText = weak[0];
+        var weak2 = document.querySelector("#weak-2");
+        weak2.innerText = weak[1];
+        var weak3 = document.querySelector("#weak-3");
+        weak3.innerText = weak[2];
+
+        // Building table of Some Numbers
+        table2.classList.toggle("d-none");
         var info1 = document.querySelector("#info-1");
         info1.innerText = tried;
         var info2 = document.querySelector("#info-2");
@@ -160,7 +238,6 @@ form.addEventListener('submit', async function (e) {
         var info7 = document.querySelector("#info-7");
         info7.innerText = worstRank;
 
-        google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
 
@@ -264,6 +341,7 @@ form.addEventListener('submit', async function (e) {
             var data7 = new google.visualization.DataTable();
             data7.addColumn('string', 'Tagwise_Accuracy');
             data7.addColumn('number', 'Percentage_Accuracy');
+
             for (var x in tagAccuracy) {
                 data7.addRow([x, tagAccuracy[x]]);
             }
