@@ -1,6 +1,6 @@
-google.charts.load("current", { packages: ["corechart",'bar'] });
+google.charts.load("current", { packages: ["corechart",'bar','line'] });
 google.charts.load("current", { packages: ["calendar"] });
-const form = document.querySelector('#searchForm');
+const form = document.querySelector('#searchForm1');
 var langUsed = {};
 var verdict = {};
 var problemTag = {};
@@ -11,6 +11,10 @@ var rankArr = [];
 var labelR=[];
 var problemRating=[];
 
+for(var x in labelR){
+    labelR[x]=0;
+}
+
 
 var langUsed2= {};
 var verdict2= {};
@@ -19,7 +23,6 @@ var date2 = {};
 var heat2 = [];
 var ratingUser2 = [];
 var rankArr2 = [];
-var labelR2=[];
 var problemRating2=[];
 
 form.addEventListener('submit', async function (e) {
@@ -44,6 +47,9 @@ form.addEventListener('submit', async function (e) {
 
         var currentRating2=userInfo2.data.result[0].rating;
         var maxRating2=userInfo2.data.result[0].maxRating;
+
+        var totalContest=userRating.data.result.length;
+        var totalContest2=userRating2.data.result.length;
 
         // console.log(currentRating);
 
@@ -153,34 +159,66 @@ form.addEventListener('submit', async function (e) {
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
+        //column graph of rating, max rating
         var data1 = google.visualization.arrayToDataTable([
-          ['Rating', 'current', 'max'],
-          [handle, currentRating, maxRating],
-          [handle2, currentRating2, maxRating2],
+          ['Rating', handle, handle2],
+          ["current rating", currentRating, currentRating2],
+          ["max rating", maxRating, maxRating2],
         ]);
-          var classicOptions = {
+          var classicOptions1 = {
           width: 900,
           series: {
             0: {targetAxisIndex: 0},
-            1: {targetAxisIndex: 1}
+            // 1: {targetAxisIndex: 1}
           },
           title: 'Current and max rating of both users',
           vAxes: {
             // Adds titles to each axis.
+            // minValue: 0,
             0: {title: 'rating'},
-            1: {title: 'user'}
+           // 1: {title: 'user'}
+          },
+          vAxis: {
+            minValue: 0,
+            // ticks: [0, .3, .6, .9, 1]
           }
-        };
-        function drawClassicChart() {
-          var classicChart = new google.visualization.ColumnChart(chartDiv_1);
-          classicChart.draw(data1, classicOptions);
+        }
+        //column graph of contest given
+
+          var data2 = google.visualization.arrayToDataTable([
+          ['Contest', "total number of contest"],
+          [handle, totalContest],
+          [handle2, totalContest2],
+        ]);
+
+          var classicOptions2 = {
+          width: 900,
+          series: {
+            0: {targetAxisIndex: 0},
+            // 1: {targetAxisIndex: 1}
+          },
+          title: 'Total contest given by both users',
+          vAxes: {
+            // Adds titles to each axis.
+            0: {title: 'contests'},
+            // 1: {title: 'user'}
+          },
+          vAxis: {
+            minValue: 0,
+            // ticks: [0, .3, .6, .9, 1]
+          }
         }
 
+        function drawClassicChart() {
+          var classicChart1 = new google.visualization.ColumnChart(chartDiv_1);
+          classicChart1.draw(data1, classicOptions1);
+
+          var classicChart2= new google.visualization.ColumnChart(chartDiv_2);
+          classicChart2.draw(data2, classicOptions2);
+        }
         drawClassicChart();
 
-        }
-
-        // function drawChart() {
+        
         //     //----- start of variable 1-----------// 
         //     var data1 = new google.visualization.DataTable();
         //     data1.addColumn('string', 'language');
@@ -276,49 +314,64 @@ form.addEventListener('submit', async function (e) {
            
         //           //console.log(data.result[0]);
                 
-        //  for(var i=0;i<userRating.data.result.length;i++)
-        //     {
-        //        var sub=userRating.data.result[i];
-        //        var rating=sub.newRating;
-        //        ratingUser[i]=rating;
-        //        var label=sub.ratingUpdateTimeSeconds;
-        //        labelR[i]=label;
-        //        var rank=sub.rank;
-        //        rankArr[i]=rank;
-        //     }
+          
+          
+          for(var i=0;i<userRating.data.result.length;i++)
+             {
+                var sub=userRating.data.result[i];
+                var rating=sub.newRating;
+                
+                var label=sub.ratingUpdateTimeSeconds;
+                labelR[i]=label;
+                ratingUser[label]=rating;
+                var rank=sub.rank;
+                rankArr[label]=rank;
+                labelFinal=label;
+             }
+         for(var i=0;i<userRating2.data.result.length;i++)
+             {
+                var sub=userRating2.data.result[i];
+                var rating=sub.newRating;
+                
+                var label=sub.ratingUpdateTimeSeconds;
+                labelR[i+(userRating.data.result.length)]=label;
+                ratingUser2[label]=rating;
+                var rank=sub.rank;
+                rankArr2[label]=rank;
+             }
+
+         labelR.sort();
+         var data4 = new google.visualization.DataTable();
+            data4.addColumn('date', 'label');
+            data4.addColumn('number', 'rating 1');
+            data4.addColumn('number', 'rating 2');
+            for(var x of labelR){
+                    data4.addRow([new Date(x*1000),ratingUser[x],ratingUser2[x]]);    
+
+            }
+         var option4 = {'title':'Rating over time',
+                            interpolateNulls: true,
+                           'width':900,
+                           'height':500};
+         var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
+         chart4.draw(data4, option4);
   
-        // var data4 = new google.visualization.DataTable();
-        //    data4.addColumn('date', 'label');
-        //    data4.addColumn('number', 'rating');
-        //    for(var x in ratingUser){
-        //     	data4.addRow([new Date(labelR[x]*1000),ratingUser[x]]);
-        //    }
-        // var option4 = {'title':'Rating over time',
-        //                   'width':900,
-        //                   'height':500};
-        // var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
-        // chart4.draw(data4, option4);
-  
         
         
-        // var data5 = new google.visualization.DataTable();
-        // data5.addColumn('date', 'label');
-        // data5.addColumn('number', 'rating');
-        // for(var x in ratingUser)
-        //     {
-        //     	data5.addRow([new Date(labelR[x]*1000),rankArr[x]]);
-        //     }
-        // var option5 = {'title':'Rank over time',
-        //                   'width':900,
-        //                   'height':500};
-        // var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
-        // chart5.draw(data5, option5);
-
-        
-
-       
-
-
+         var data5 = new google.visualization.DataTable();
+         data5.addColumn('date', 'label');
+         data5.addColumn('number','rank 1');
+         data5.addColumn('number', 'rank 2');
+         for(var x of labelR)
+             {
+                 data5.addRow([new Date(x*1000),rankArr[x],rankArr2[x]]);
+             }
+         var option5 = {'title':'Rank over time',
+                            interpolateNulls: true,
+                           'width':900,
+                           'height':500};
+         var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
+         chart5.draw(data5, option5);
 
         // var data7 = new google.visualization.DataTable();
         // data7.addColumn('string', 'Problem_Rating');
@@ -337,12 +390,7 @@ form.addEventListener('submit', async function (e) {
         // var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
         // chart7.draw(data7, option7);
          
-        
-
-
-
-               
-        // }
+         }
     } catch (error) {
         alert("User not found !!!");
     }
