@@ -5,6 +5,7 @@
 	<title>extra page</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
@@ -19,16 +20,80 @@
 </head>
 
 <body>
-	<form id="searchForm2">
-		<div>
-			<input type="text" placeholder="Enter Codeforces Handle" name="query">
+	<nav class="navbar navbar-expand-lg navbar-dark container-fluid" style="background-color: #0d1d78;">
+		<a class="navbar-brand" href="#">Codeforces Guide</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" href="index.html">Analyze</span></a>
+				<a class="nav-item nav-link" href="compare.html">Compare</a>
+				<a class="nav-item nav-link active" href="#">Extra</a>
+			</div>
 		</div>
-		<button>Add User</button>
-	</form>
+	</nav>
+	<div class="container">
+		<div class="jumbotron text-center pt-5">
+			<h1>Virtual Contest Picker</h1>
+			<p>Searching for a Virtual Contest to give with your friends?<br> Then you are at the right spot! Enter the
+				Codeforces handles of all the users and get a list of contest<br> from which none of you have any
+				questions attempted.</p>
+		</div>
 
-	<button id="find">Find Contests</button>
-	<ul id="listOfUsers"></ul>
-	<ul id="ans"></ul>
+		<div class="pb-3 pt-3">
+			<form id="searchForm2">
+				<div class="mb-3">
+					<input class="form-control" type="text" placeholder="Enter Codeforces Handle" name="query">
+				</div>
+				<div>
+					<button class="btn btn-light">Add User</button>
+				</div>
+			</form>
+		</div>
+		<div class="row">
+			<div class="m-auto">
+				<div class="justify-content-center">
+					<button id="find" class="btn btn-success">Find Contests</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-3 m-3 p-3 bgColor d-none" id="t1">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Users Added</th>
+						</tr>
+					</thead>
+					<tbody id="listOfUsers">
+
+					</tbody>
+				</table>
+				<tr>
+					<button id="reset" class="btn btn-danger">Reset</button>
+				</tr>
+			</div>
+			<div class="col-7 m-3 p-3 bgColor d-none" id="t2">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">List of Contests</th>
+						</tr>
+					</thead>
+					<tbody id="ans">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+
+	</div>
+
 	<script src="Extra.js"></script>
 </body>
 

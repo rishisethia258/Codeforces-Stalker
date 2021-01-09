@@ -1,5 +1,6 @@
 const form = document.querySelector('#searchForm2');
 const btn = document.querySelector('#find');
+const reset = document.querySelector('#reset');
 var users = [];
 
 form.addEventListener('submit', async function (e) {
@@ -7,10 +8,10 @@ form.addEventListener('submit', async function (e) {
     try {
         const handle = form.elements.query.value;
         await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
-        console.log(handle);
         var ul = document.querySelector("#listOfUsers");
-        ul.innerHTML += (`<li>${handle}</li>`);
+        ul.innerHTML += (`<tr><td>${handle}</td></tr>`);
         users.push(handle);
+        document.querySelector("#t1").classList.remove("d-none");
     } catch {
         alert("User Not Found");
     }
@@ -31,7 +32,6 @@ btn.addEventListener('click', async function (e) {
             var u = contests.data.result[i].id;
             ids[u] = true;
         }
-        console.log(ids);
         for (var i = 0; i < userStatus.length; i++) {
             console.log(userStatus[i]);
             for (var j = 0; j < userStatus[i].length; j++) {
@@ -39,12 +39,29 @@ btn.addEventListener('click', async function (e) {
             }
         }
         var ul = document.querySelector("#ans");
-        for (i in ids) {
-            if (ids[i]) {
-                ul.innerHTML += (`<li><a href="https://codeforces.com/contests/${i}">ContestId - ${i}</a></li>`);
+        for (var i = 0; i < contests.data.result.length; i++) {
+            var u = contests.data.result[i].id;
+            var v = contests.data.result[i].name;
+            if (ids[u]) {
+                ul.innerHTML += (`<tr><td><a href="https://codeforces.com/contests/${u}">${v}</a></td></tr>`);
             }
         }
+
+        document.querySelector("#t2").classList.remove("d-none");
     } catch {
         alert("Some error !!!");
     }
 });
+
+reset.addEventListener('click', async function (e) {
+    e.preventDefault();
+    users = [];
+    var ul = document.querySelector("#listOfUsers");
+    ul.innerHTML = '';
+    var vl = document.querySelector("#ans");
+    vl.innerHTML = '';
+    document.querySelector("#t1").classList.add("d-none");
+    document.querySelector("#t2").classList.add("d-none");
+});
+
+

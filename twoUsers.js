@@ -24,42 +24,42 @@ form.addEventListener('submit', async function (e) {
 
 
         var langUsed = {};
-var verdict = {};
-var problemTag = {};
-var date = {};
-var heat = [];
-var ratingUser = [];
-var rankArr = [];
-var labelR = [];
-var problemRating = [];
-var problems = {};
-var tried = 0;
-var solved = 0;
-var avgAttempts = 0;
-var solvedWithOne = 0;
-var bestRank = 1e10;
-var worstRank = 0;
+        var verdict = {};
+        var problemTag = {};
+        var date = {};
+        var heat = [];
+        var ratingUser = [];
+        var rankArr = [];
+        var labelR = [];
+        var problemRating = [];
+        var problems = {};
+        var tried = 0;
+        var solved = 0;
+        var avgAttempts = 0;
+        var solvedWithOne = 0;
+        var bestRank = 1e10;
+        var worstRank = 0;
 
-for (var x in labelR) {
-    labelR[x] = 0;
-}
+        for (var x in labelR) {
+            labelR[x] = 0;
+        }
 
 
-var langUsed2 = {};
-var verdict2 = {};
-var problemTag2 = {};
-var date2 = {};
-var heat2 = [];
-var ratingUser2 = [];
-var rankArr2 = [];
-var problemRating2 = [];
-var problems2 = {};
-var tried2 = 0;
-var solved2 = 0;
-var avgAttempts2 = 0;
-var solvedWithOne2 = 0;
-var bestRank2 = 1e10;
-var worstRank2 = 0;
+        var langUsed2 = {};
+        var verdict2 = {};
+        var problemTag2 = {};
+        var date2 = {};
+        var heat2 = [];
+        var ratingUser2 = [];
+        var rankArr2 = [];
+        var problemRating2 = [];
+        var problems2 = {};
+        var tried2 = 0;
+        var solved2 = 0;
+        var avgAttempts2 = 0;
+        var solvedWithOne2 = 0;
+        var bestRank2 = 1e10;
+        var worstRank2 = 0;
 
         var currentRating = userInfo.data.result[0].rating;
         var maxRating = userInfo.data.result[0].maxRating;
@@ -307,7 +307,7 @@ var worstRank2 = 0;
             ]);
             var classicOptions1 = {
                 width: 400,
-                height:450,
+                height: 450,
                 legend: 'none',
                 'backgroundColor': '#DDDDDD',
                 series: {
@@ -338,7 +338,7 @@ var worstRank2 = 0;
 
             var classicOptions2 = {
                 width: 400,
-                height:450,
+                height: 450,
                 'backgroundColor': '#DDDDDD',
                 legend: 'none',
                 series: {
@@ -355,10 +355,10 @@ var worstRank2 = 0;
                     minValue: 0,
                     // ticks: [0, .3, .6, .9, 1]
                 },
-                
+
                 fontSize: 15,
                 fontName: 'Arial'
-                    
+
             }
 
             function drawClassicChart() {
@@ -385,10 +385,10 @@ var worstRank2 = 0;
                 interpolateNulls: true,
                 'width': 900,
                 'height': 500,
-                
-                 fontSize: 15,
-                 fontName: 'Arial'
-                    
+
+                fontSize: 15,
+                fontName: 'Arial'
+
             };
             var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
             chart4.draw(data4, option4);
@@ -428,10 +428,10 @@ var worstRank2 = 0;
                 'backgroundColor': '#DDDDDD',
                 'height': 800,
                 legend: 'none',
-                
+
                 fontSize: 15,
                 fontName: 'Arial'
-                   
+
             };
             // Instantiate and draw our chart, passing in some options.
             var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
@@ -448,7 +448,7 @@ var worstRank2 = 0;
 
             var classicOptions8 = {
                 width: 1100,
-                height:450,
+                height: 450,
                 'backgroundColor': '#DDDDDD',
                 series: {
                     0: { targetAxisIndex: 0 },
@@ -465,10 +465,10 @@ var worstRank2 = 0;
                     minValue: 0,
                     // ticks: [0, .3, .6, .9, 1]
                 },
-               
+
                 fontSize: 15,
                 fontName: 'Arial'
-                    
+
             }
             function drawClassicChart1() {
                 var classicChart8 = new google.visualization.ColumnChart(chart_8);

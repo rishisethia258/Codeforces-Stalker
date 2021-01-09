@@ -425,7 +425,7 @@ form.addEventListener('submit', async function (e) {
             };
             chart.draw(dataTable, options);
 
-            $(window).resize(function(){
+            $(window).resize(function () {
                 drawChart();
             });
 

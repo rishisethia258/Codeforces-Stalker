@@ -35,6 +35,9 @@ body {
     margin-right: 37%;
     margin-left: 37%;
 }
+#find {
+    width: 100%;
+}
 
 .card {
     /*background-color: #95a3f0;*/
