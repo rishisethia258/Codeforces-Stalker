@@ -26,6 +26,7 @@ body {
 .card {
     background-color: #95a3f0;
     color: white;
+    border-radius: 5%;
 }
 
 
@@ -51,5 +52,9 @@ body {
 .bgColor {
     background-color: #95a3f0;
     color: black;
-    text-align: center;
+}
+
+.heatmap {
+    width: 80%;
+    margin : auto;
 }
