@@ -30,7 +30,7 @@
             </div>
         </div>
     </nav>
-    <div class="container ">
+    <div class="container">
         <div class="jumbotron text-center pt-5">
             <h1>Codeforces User Search</h1>
             <p>Check out your codeforces account here and have a detailed<br> overview about your performance</p>
@@ -47,121 +47,129 @@
             </form>
         </div>
 
+        <div id="vis" class="d-none">
+            <div class="m-5">
+                <div class="row">
+                    <div class="card pie1" id="card1">
+                        <div class="card-body">
+                            <div id="chart_1"></div>
+                        </div>
+                    </div>
+                    <div class="card pie1" id="card2">
+                        <div class="card-body">
+                            <div id="chart_2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card pie2" id="card3">
+                        <div class="card-body">
+                            <div id="chart_3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_4"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card m-2" id="card5" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card graph1" id="card6">
+                        <div class="card-body">
+                            <div id="chart_6"></div>
+                        </div>
+                    </div>
+                    <div class="card graph1" id="card7">
+                        <div class="card-body">
+                            <div id="chart_7"></div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="m-5">
-            <div class="row">
-                <div class="card pie1" id="card1">
-                    <div class="card-body">
-                        <div id="chart_1"></div>
+                <div class="row">
+                    <div class="bgColor card p-5">
+                        <h1>Strength and Weakness</h1>
+                        <table class="table container" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Strong Topics</th>
+                                    <th>Weak Topics</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="stng-1"></td>
+                                    <td id="weak-1"></td>
+                                </tr>
+                                <tr>
+                                    <td id="stng-2"></td>
+                                    <td id="weak-2"></td>
+                                </tr>
+                                <tr>
+                                    <td id="stng-3"></td>
+                                    <td id="weak-3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="card pie1" id="card2">
-                    <div class="card-body">
-                        <div id="chart_2"></div>
+                <div class="row">
+                    <div class="bgColor card p-5">
+                        <h1>Some Numbers</h1>
+                        <table class="table container" id="table2">
+                            <tbody>
+                                <tr>
+                                    <td>Problems Tried</th>
+                                    <td id="info-1"></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Problems Solved</th>
+                                    <td id="info-2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Average Attempts for Solving a Question</th>
+                                    <td id="info-3"></td>
+                                </tr>
+                                <tr>
+                                    <td>Solved With One Submission</th>
+                                    <td id="info-4"></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Contests Given</th>
+                                    <td id="info-5"></td>
+                                </tr>
+                                <tr>
+                                    <td>Best Rank</th>
+                                    <td id="info-6"></td>
+                                </tr>
+                                <tr>
+                                    <td>Worst Rank</th>
+                                    <td id="info-7"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card pie2" id="card3">
-                    <div class="card-body">
-                        <div id="chart_3"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card m-2" id="card4" style="width: 100%;">
-                    <div class="card-body">
-                        <div id="chart_4"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card m-2" id="card5" style="width: 100%;">
-                    <div class="card-body">
-                        <div id="chart_5"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card graph1" id="card6">
-                    <div class="card-body">
-                        <div id="chart_6"></div>
-                    </div>
-                </div>
-                <div class="card graph1" id="card7">
-                    <div class="card-body">
-                        <div id="chart_7"></div>
+                <div class="row">
+                    <div class="card heatmap" id="card8">
+                        <div class="card-body">
+                            <div id="calendar_basic"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="bgColor">
-                    <h1 class="text-center">Strengths and Weakness</h1>
-                    <table class="table container d-none" id="table1">
-                        <thead>
-                            <tr>
-                                <th>Strong Topics</th>
-                                <th>Weak Topics</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="stng-1"></td>
-                                <td id="weak-1"></td>
-                            </tr>
-                            <tr>
-                                <td id="stng-2"></td>
-                                <td id="weak-2"></td>
-                            </tr>
-                            <tr>
-                                <td id="stng-3"></td>
-                                <td id="weak-3"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="bgColor">
-                    <h1>Some Numbers</h1>
-                    <table class="table container d-none" id="table2">
-                        <tbody>
-                            <tr>
-                                <td>Problems Tried</th>
-                                <td id="info-1"></td>
 
-                            </tr>
-                            <tr>
-                                <td>Problems Solved</th>
-                                <td id="info-2"></td>
-                            </tr>
-                            <tr>
-                                <td>Average Attempts for Solving a Question</th>
-                                <td id="info-3"></td>
-                            </tr>
-                            <tr>
-                                <td>Solved With One Submission</th>
-                                <td id="info-4"></td>
-                            </tr>
-                            <tr>
-                                <td>Number of Contests Given</th>
-                                <td id="info-5"></td>
-                            </tr>
-                            <tr>
-                                <td>Best Rank</th>
-                                <td id="info-6"></td>
-                            </tr>
-                            <tr>
-                                <td>Worst Rank</th>
-                                <td id="info-7"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="calendar_basic" style="width: 1000px; height: 350px;"></div>
         </div>
     </div>
 
