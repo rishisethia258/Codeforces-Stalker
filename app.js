@@ -251,9 +251,14 @@ form.addEventListener('submit', async function (e) {
                 data1.addRow([lang, langUsed[lang]]);
             }
             var option1 = {
-                'title': 'languages used by user',
-                'width': 400,
-                'height': 300
+                height: $('#card1').width(),
+                title: 'LANGUAGES USED BY ' + handle,
+                legend: 'none',
+                pieSliceText: 'label',
+                is3D: true,
+                'backgroundColor': '#95a3f0',
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart1 = new google.visualization.PieChart(document.getElementById('chart_1'));
             chart1.draw(data1, option1);
@@ -267,9 +272,13 @@ form.addEventListener('submit', async function (e) {
                 data2.addRow([verd, verdict[verd]]);
             }
             var option2 = {
-                'title': 'Verdicts by user',
-                'width': 400,
-                'height': 300
+                height: $('#card1').width(),
+                title: 'VERDICTS OF ' + handle,
+                legend: 'none',
+                is3D: true,
+                'backgroundColor': '#95a3f0',
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart2 = new google.visualization.PieChart(document.getElementById('chart_2'));
             chart2.draw(data2, option2);
@@ -283,9 +292,24 @@ form.addEventListener('submit', async function (e) {
                 data3.addRow([tag, problemTag[tag]]);
             }
             var option3 = {
-                'title': 'problem tags solved used by user',
-                'width': 400,
-                'height': 300
+                width: Math.max(600, $('#card3').width()) * 0.9,
+                height: Math.max(600, $('#card3').width()) * 0.75,
+                chartArea: { width: '80%', height: '70%' },
+                title: 'TAGS OF ' + handle,
+                'backgroundColor': '#95a3f0',
+                pieSliceText: 'none',
+                legend: {
+                    position: 'right',
+                    alignment: 'center',
+                    textStyle: {
+                        fontSize: 15,
+                        fontName: 'Arial'
+                    }
+                },
+                pieHole: 0.5,
+                tooltip: {
+                    text: 'percentage'
+                },
             };
             var chart3 = new google.visualization.PieChart(document.getElementById('chart_3'));
             chart3.draw(data3, option3);
@@ -299,9 +323,12 @@ form.addEventListener('submit', async function (e) {
                 data4.addRow([new Date(labelR[x] * 1000), ratingUser[x]]);
             }
             var option4 = {
-                'title': 'Rating over time',
-                'width': 900,
-                'height': 500
+                height: $('#card1').width(),
+                title: 'RATING OVER TIME',
+                legend: 'none',
+                'backgroundColor': '#95a3f0',
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
             chart4.draw(data4, option4);
@@ -315,9 +342,12 @@ form.addEventListener('submit', async function (e) {
                 data5.addRow([new Date(labelR[x] * 1000), rankArr[x]]);
             }
             var option5 = {
-                'title': 'Rank over time',
-                'width': 900,
-                'height': 500
+                height: $('#card1').width(),
+                title: 'RANK IN CONTESTS OVER TIME',
+                legend: 'none',
+                'backgroundColor': '#95a3f0',
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
             chart5.draw(data5, option5);
@@ -332,8 +362,12 @@ form.addEventListener('submit', async function (e) {
             }
             var option6 = {
                 'title': 'Problem Ratings',
-                'width': 600,
-                'height': 800
+                width: Math.max(600, $('#card6').width()) * 0.8,
+                height: 900,
+                legend: 'none',
+                'backgroundColor': '#95a3f0',
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart6 = new google.visualization.BarChart(document.getElementById('chart_6'));
             chart6.draw(data6, option6);
@@ -349,8 +383,12 @@ form.addEventListener('submit', async function (e) {
             }
             var option7 = {
                 'title': 'Tagwise Accuracy',
-                'width': 600,
-                'height': 800
+                width: Math.max(600, $('#card7').width()) * 0.8,
+                height: 900,
+                legend: 'none',
+                'backgroundColor': '#95a3f0',
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
             chart7.draw(data7, option7);
