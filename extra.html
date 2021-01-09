@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>extra page</title>
+	<title>extra page</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -16,13 +17,19 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
+
 <body>
-    <form id="searchForm2">
+	<form id="searchForm2">
 		<div>
-			<input type="text" placeholder="Enter 1st Handle" name="query">
+			<input type="text" placeholder="Enter Codeforces Handle" name="query">
 		</div>
-		<button>Test</button>
+		<button>Add User</button>
 	</form>
-    <script src="Extra.js"></script>
+
+	<button id="find">Find Contests</button>
+	<ul id="listOfUsers"></ul>
+	<ul id="ans"></ul>
+	<script src="Extra.js"></script>
 </body>
+
 </html>
