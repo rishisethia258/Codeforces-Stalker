@@ -27,3 +27,10 @@ Check it out [here](https://rishisethia258.github.io/Codeforces-Stalker)
 * Accepts any number of users
 * Shows a list of virtual contest for them
 
+## Problem We Aim to Solve
+ We had an aim to make a webapp for people trying to master Competitive Programming. Here they can analyze and compare themselves with their friends. Also they can find a list mutually unattempted contests which they could give with virtual participation feature at codeforces.
+ 
+## Future Prospects
+* Recommend problems to users to work upon their weak areas.
+* Add Rating Predictor.
+* Add Animations to graphs.
