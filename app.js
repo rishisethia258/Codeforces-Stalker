@@ -14,6 +14,22 @@ form.addEventListener('submit', async function (e) {
         const userRating = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`);
         // console.log(userStatus.data);
         full.classList.remove("d-none");
+
+        var pic=userInfo.data.result[0].titlePhoto;
+        
+        var rating=userInfo.data.result[0].rating;
+        var friends=userInfo.data.result[0].friendOfCount;
+        var contribution=userInfo.data.result[0].contribution;
+        var rank=userInfo.data.result[0].rank;
+
+        // console.log(userInfo);
+
+        document.getElementById("img1").src="https:"+pic;
+        document.getElementById("rating").innerText="User rating: "+rating;
+        document.getElementById("friends").innerText="friend of: "+friends;
+        document.getElementById("contribution").innerText="contributions "+contribution;
+        document.getElementById("rank").innerText="current rank: "+rank;
+
         var langUsed = {};
         var verdict = {};
         var problemTag = {};
@@ -425,7 +441,7 @@ form.addEventListener('submit', async function (e) {
             };
             chart.draw(dataTable, options);
 
-            $(window).resize(function () {
+            $(window).resize(function(){
                 drawChart();
             });
 
