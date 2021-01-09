@@ -3,26 +3,7 @@ google.charts.load("current", { packages: ["calendar"] });
 const form = document.querySelector('#searchForm');
 const table1 = document.querySelector('#table1');
 const table2 = document.querySelector('#table2');
-var langUsed = {};
-var verdict = {};
-var problemTag = {};
-var date = {};
-var heat = [];
-var ratingUser = [];
-var rankArr = [];
-var labelR = [];
-var problemRating = [];
-var tagAccuracy = {};
-var problems = {};
-var tried = 0;
-var solved = 0;
-var avgAttempts = 0;
-var solvedWithOne = 0;
-var contestGiven = 0;
-var bestRank = 1e10;
-var worstRank = 0;
-var strong = [];
-var weak = [];
+const full = document.querySelector("#vis");
 
 form.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -32,6 +13,27 @@ form.addEventListener('submit', async function (e) {
         const userStatus = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
         const userRating = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`);
         // console.log(userStatus.data);
+        full.classList.remove("d-none");
+        var langUsed = {};
+        var verdict = {};
+        var problemTag = {};
+        var date = {};
+        var heat = [];
+        var ratingUser = [];
+        var rankArr = [];
+        var labelR = [];
+        var problemRating = [];
+        var tagAccuracy = {};
+        var problems = {};
+        var tried = 0;
+        var solved = 0;
+        var avgAttempts = 0;
+        var solvedWithOne = 0;
+        var contestGiven = 0;
+        var bestRank = 1e10;
+        var worstRank = 0;
+        var strong = [];
+        var weak = [];
 
         for (var i = 0; i < userStatus.data.result.length; i++) {
             var sub = userStatus.data.result[i];
@@ -209,7 +211,6 @@ form.addEventListener('submit', async function (e) {
         weak.push(ind);
 
         // Building Strongest Weakest Topic Table
-        table1.classList.toggle("d-none");
         var stng1 = document.querySelector("#stng-1");
         stng1.innerText = strong[0];
         var stng2 = document.querySelector("#stng-2");
@@ -224,7 +225,6 @@ form.addEventListener('submit', async function (e) {
         weak3.innerText = weak[2];
 
         // Building table of Some Numbers
-        table2.classList.toggle("d-none");
         var info1 = document.querySelector("#info-1");
         info1.innerText = tried;
         var info2 = document.querySelector("#info-2");
