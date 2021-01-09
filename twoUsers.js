@@ -373,22 +373,22 @@ form.addEventListener('submit', async function (e) {
          var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
          chart5.draw(data5, option5);
 
-        // var data7 = new google.visualization.DataTable();
-        // data7.addColumn('string', 'Problem_Rating');
-        // data7.addColumn('number', 'Number_Of_Such_Rating');
-        // for (var x in problemRating) {
-        //     data7.addRow([x, problemRating[x]]);
-        // }
-        // //set options
-        // var option7 = {
-        //     'title': 'Problem Ratings',
-        //     'width': 600,
-        //     'height': 800
-
-        // };
-        // // Instantiate and draw our chart, passing in some options.
-        // var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
-        // chart7.draw(data7, option7);
+        var data7 = new google.visualization.DataTable();
+         data7.addColumn('string', 'Problem_Rating');
+         data7.addColumn('number', `${handle}`);
+         data7.addColumn('number',`${handle2}`);
+         for (var x in problemRating) {
+             data7.addRow([x, problemRating[x],problemRating2[x]]);
+         }
+         //set options
+         var option7 = {
+             'title': 'Problem Ratings',
+             'width': 600,
+             'height': 800
+         };
+         // Instantiate and draw our chart, passing in some options.
+         var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
+         chart7.draw(data7, option7);
          
          }
     } catch (error) {
