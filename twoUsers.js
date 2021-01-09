@@ -1,7 +1,29 @@
 google.charts.load("current", { packages: ["corechart", 'bar', 'line'] });
 google.charts.load("current", { packages: ["calendar"] });
 const form = document.querySelector('#searchForm1');
-var langUsed = {};
+
+const full = document.querySelector("#vis");
+
+form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const handle = form.elements.query.value;
+    const handle2 = form.elements.query2.value;
+    // console.log(handle2);
+
+    try {
+        const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
+        const userStatus = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
+        const userRating = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`);
+
+        const userInfo2 = await axios.get(`https://codeforces.com/api/user.info?handles=${handle2}`);
+        const userStatus2 = await axios.get(`https://codeforces.com/api/user.status?handle=${handle2}`);
+        const userRating2 = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle2}`);
+        //const problemSet = await axios.get(`https://codeforces.com/api/problemset.problems?tags=${handle}`);
+
+        full.classList.remove("d-none");
+
+
+        var langUsed = {};
 var verdict = {};
 var problemTag = {};
 var date = {};
@@ -38,23 +60,6 @@ var avgAttempts2 = 0;
 var solvedWithOne2 = 0;
 var bestRank2 = 1e10;
 var worstRank2 = 0;
-
-form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const handle = form.elements.query.value;
-    const handle2 = form.elements.query2.value;
-    // console.log(handle2);
-
-    try {
-        const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
-        const userStatus = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
-        const userRating = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`);
-
-        const userInfo2 = await axios.get(`https://codeforces.com/api/user.info?handles=${handle2}`);
-        const userStatus2 = await axios.get(`https://codeforces.com/api/user.status?handle=${handle2}`);
-        const userRating2 = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle2}`);
-        //const problemSet = await axios.get(`https://codeforces.com/api/problemset.problems?tags=${handle}`);
-
 
         var currentRating = userInfo.data.result[0].rating;
         var maxRating = userInfo.data.result[0].maxRating;
@@ -270,7 +275,7 @@ form.addEventListener('submit', async function (e) {
 
         // Building Table
         var table = document.querySelector("#compareTable");
-        table.classList.toggle("d-none");
+        // table.classList.toggle("d-none");
         document.querySelector("#handle1").innerText = handle;
         document.querySelector("#handle2").innerText = handle2;
         document.querySelector("#tried1").innerText = tried;
@@ -301,7 +306,10 @@ form.addEventListener('submit', async function (e) {
                 ["max rating", maxRating, maxRating2],
             ]);
             var classicOptions1 = {
-                width: 900,
+                width: 400,
+                height:450,
+                legend: 'none',
+                'backgroundColor': '#DDDDDD',
                 series: {
                     0: { targetAxisIndex: 0 },
                     // 1: {targetAxisIndex: 1}
@@ -316,7 +324,9 @@ form.addEventListener('submit', async function (e) {
                 vAxis: {
                     minValue: 0,
                     // ticks: [0, .3, .6, .9, 1]
-                }
+                },
+                'fontName': 'Arial',
+                'fontSize': '15'
             }
             //column graph of contest given
 
@@ -327,7 +337,10 @@ form.addEventListener('submit', async function (e) {
             ]);
 
             var classicOptions2 = {
-                width: 900,
+                width: 400,
+                height:450,
+                'backgroundColor': '#DDDDDD',
+                legend: 'none',
                 series: {
                     0: { targetAxisIndex: 0 },
                     // 1: {targetAxisIndex: 1}
@@ -341,14 +354,18 @@ form.addEventListener('submit', async function (e) {
                 vAxis: {
                     minValue: 0,
                     // ticks: [0, .3, .6, .9, 1]
-                }
+                },
+                
+                fontSize: 15,
+                fontName: 'Arial'
+                    
             }
 
             function drawClassicChart() {
-                var classicChart1 = new google.visualization.ColumnChart(chartDiv_1);
+                var classicChart1 = new google.visualization.ColumnChart(chart_1);
                 classicChart1.draw(data1, classicOptions1);
 
-                var classicChart2 = new google.visualization.ColumnChart(chartDiv_2);
+                var classicChart2 = new google.visualization.ColumnChart(chart_2);
                 classicChart2.draw(data2, classicOptions2);
             }
             drawClassicChart();
@@ -364,9 +381,14 @@ form.addEventListener('submit', async function (e) {
             }
             var option4 = {
                 'title': 'Rating over time',
+                'backgroundColor': '#DDDDDD',
                 interpolateNulls: true,
                 'width': 900,
-                'height': 500
+                'height': 500,
+                
+                 fontSize: 15,
+                 fontName: 'Arial'
+                    
             };
             var chart4 = new google.visualization.LineChart(document.getElementById('chart_4'));
             chart4.draw(data4, option4);
@@ -384,7 +406,10 @@ form.addEventListener('submit', async function (e) {
                 'title': 'Rank over time',
                 interpolateNulls: true,
                 'width': 900,
-                'height': 500
+                'backgroundColor': '#DDDDDD',
+                'height': 500,
+                'fontName': 'Arial',
+                'fontSize': '15'
             };
             var chart5 = new google.visualization.LineChart(document.getElementById('chart_5'));
             chart5.draw(data5, option5);
@@ -400,28 +425,17 @@ form.addEventListener('submit', async function (e) {
             var option7 = {
                 'title': 'Problem Ratings',
                 'width': 600,
-                'height': 800
+                'backgroundColor': '#DDDDDD',
+                'height': 800,
+                legend: 'none',
+                
+                fontSize: 15,
+                fontName: 'Arial'
+                   
             };
             // Instantiate and draw our chart, passing in some options.
             var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
             chart7.draw(data7, option7);
-
-            // var data8 = new google.visualization.DataTable();
-            // data8.addColumn('string', 'Problem_Tag');
-            // data8.addColumn('number', `${handle}`);
-            // data8.addColumn('number',`${handle2}`);
-            // for (var x in problemTag) {
-            //     data8.addRow([x, problemTag[x],problemTag2[x]]);
-            // }
-            // //set options
-            // var option8 = {
-            //     'title': 'Problem Tags',
-            //     'width': 600,
-            //     'height': 2000
-            // };
-            // // Instantiate and draw our chart, passing in some options.
-            // var chart8 = new google.visualization.BarChart(document.getElementById('chart_8'));
-            // chart8.draw(data8, option8);
 
             //column graph of solved problems by tag
             var data8 = new google.visualization.DataTable()
@@ -433,7 +447,9 @@ form.addEventListener('submit', async function (e) {
             }
 
             var classicOptions8 = {
-                width: 1300,
+                width: 1100,
+                height:450,
+                'backgroundColor': '#DDDDDD',
                 series: {
                     0: { targetAxisIndex: 0 },
                     // 1: {targetAxisIndex: 1}
@@ -448,7 +464,11 @@ form.addEventListener('submit', async function (e) {
                 vAxis: {
                     minValue: 0,
                     // ticks: [0, .3, .6, .9, 1]
-                }
+                },
+               
+                fontSize: 15,
+                fontName: 'Arial'
+                    
             }
             function drawClassicChart1() {
                 var classicChart8 = new google.visualization.ColumnChart(chart_8);
