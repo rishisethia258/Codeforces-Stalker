@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>extra page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/stylesheets/styles.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark container-fluid" style="background-color: #0d1d78;">
+		<a class="navbar-brand" href="#">Codeforces Guide</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" href="index.html">Analyze</span></a>
+				<a class="nav-item nav-link" href="compare.html">Compare</a>
+				<a class="nav-item nav-link active" href="#">Contest Picker</a>
+			</div>
+		</div>
+	</nav>
+	<main>
+		<div class="container">
+			<div class="jumbotron text-center pt-5">
+				<h1>Virtual Contest Picker</h1>
+				<p>Searching for a Virtual Contest to give with your friends?<br> Then you are at the right spot! Enter
+					the
+					Codeforces handles of all the users and get a list of contest<br> from which none of you have any
+					questions attempted.</p>
+			</div>
+
+			<div class="pb-3 pt-3">
+				<form id="searchForm2">
+					<div class="mb-3">
+						<input class="form-control" type="text" placeholder="Enter Codeforces Handle" name="query">
+					</div>
+					<div>
+						<button class="btn btn-light">Add User</button>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="m-auto">
+					<div class="justify-content-center">
+						<button id="find" class="btn btn-success">Find Contests</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-3 m-3 p-3 bgColor d-none" id="t1">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Users Added</th>
+							</tr>
+						</thead>
+						<tbody id="listOfUsers">
+
+						</tbody>
+					</table>
+					<tr>
+						<button id="reset" class="btn btn-danger">Reset</button>
+					</tr>
+				</div>
+				<div class="col-7 m-3 p-3 bgColor d-none" id="t2">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">List of Contests</th>
+							</tr>
+						</thead>
+						<tbody id="ans">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer id="footer">
+		<div id="About_Us">About Us : We visualize your Competitive Programming progress!
+		</div>
+		<div class="fooltink"> Resources :
+
+			<a class="footlink" href="https://codeforces.com/" style="text-decoration:none"><img
+					src="https://images.squarespace-cdn.com/content/v1/5a076df2268b966170809a2c/1511918009339-YOT20YA31EFYH71J55TQ/ke17ZwdGBToddI8pDm48kHuMSja0Vh8eB_h0MuaD_CRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwU8GNIaN2hBf1MRW24-pMWEs13LPVLeLgTsuCQQ6fIlIDXqTXNEBriE4Y9rQ8vzr4/codeforces_logo.png"
+					style="width:100px;height:30px;"></a>
+			<a class="footlink" href="https://www.w3schools.com/" style="text-decoration:none"><img
+					src="https://play-lh.googleusercontent.com/i-ij7KM2pFUUpFE31QAUDXg5mzGFNbm16S4tjmg2ZyuhCGLgNJ8oXJRbq7ysh6LoZg"
+					style="width:30px;height:30px;"></a>
+			<a class="footlink" href="https://www.geeksforgeeks.org/" style="text-decoration:none"><img
+					src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg"
+					style="width:100px;height:30px;"></a>
+			<a class="footlink" href="https://cp-algorithms.com/" style="text-decoration:none">CP-Algorithms</a>
+
+		</div>
+	</footer>
+
+
+	<script src="assets/scripts/contestPicker.js"></script>
+</body>
+
+</html>

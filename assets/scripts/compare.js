@@ -8,7 +8,6 @@ form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const handle = form.elements.query.value;
     const handle2 = form.elements.query2.value;
-    // console.log(handle2);
 
     try {
         const userInfo = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
@@ -18,11 +17,8 @@ form.addEventListener('submit', async function (e) {
         const userInfo2 = await axios.get(`https://codeforces.com/api/user.info?handles=${handle2}`);
         const userStatus2 = await axios.get(`https://codeforces.com/api/user.status?handle=${handle2}`);
         const userRating2 = await axios.get(`https://codeforces.com/api/user.rating?handle=${handle2}`);
-        //const problemSet = await axios.get(`https://codeforces.com/api/problemset.problems?tags=${handle}`);
 
         full.classList.remove("d-none");
-
-
         var langUsed = {};
         var verdict = {};
         var problemTag = {};
@@ -43,8 +39,6 @@ form.addEventListener('submit', async function (e) {
         for (var x in labelR) {
             labelR[x] = 0;
         }
-
-
         var langUsed2 = {};
         var verdict2 = {};
         var problemTag2 = {};
@@ -69,8 +63,6 @@ form.addEventListener('submit', async function (e) {
 
         var totalContest = userRating.data.result.length;
         var totalContest2 = userRating2.data.result.length;
-
-        // console.log(currentRating);
 
         for (var i = 0; i < userStatus.data.result.length; i++) {
             var sub = userStatus.data.result[i];
@@ -126,9 +118,6 @@ form.addEventListener('submit', async function (e) {
                     problemTag[tags[k]]++;
                 }
             }
-
-
-
 
             var rating = sub.problem.rating;
             if (ver == "OK" && rating != undefined) {
@@ -196,7 +185,6 @@ form.addEventListener('submit', async function (e) {
                 }
             }
 
-
             var rating2 = sub2.problem.rating;
             if (ver2 == "OK" && rating2 != undefined) {
                 if (problemRating2[rating2] === undefined) {
@@ -207,7 +195,6 @@ form.addEventListener('submit', async function (e) {
                 }
             }
         }
-
 
         for (i in problems) {
             tried++;
@@ -275,7 +262,6 @@ form.addEventListener('submit', async function (e) {
 
         // Building Table
         var table = document.querySelector("#compareTable");
-        // table.classList.toggle("d-none");
         document.querySelector("#handle1").innerText = handle;
         document.querySelector("#handle2").innerText = handle2;
         document.querySelector("#tried1").innerText = tried;
@@ -293,13 +279,10 @@ form.addEventListener('submit', async function (e) {
         document.querySelector("#worstRank1").innerText = worstRank;
         document.querySelector("#worstRank2").innerText = worstRank2;
 
-
-        // console.log(currentRating);
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
 
-            //column graph of rating, max rating
             var data1 = google.visualization.arrayToDataTable([
                 ['Rating', handle, handle2],
                 ["current rating", currentRating, currentRating2],
@@ -312,23 +295,17 @@ form.addEventListener('submit', async function (e) {
                 'backgroundColor': '#DDDDDD',
                 series: {
                     0: { targetAxisIndex: 0 },
-                    // 1: {targetAxisIndex: 1}
                 },
                 title: 'Current and max rating of both users',
                 vAxes: {
-                    // Adds titles to each axis.
-                    // minValue: 0,
                     0: { title: 'rating' },
-                    // 1: {title: 'user'}
                 },
                 vAxis: {
                     minValue: 0,
-                    // ticks: [0, .3, .6, .9, 1]
                 },
                 'fontName': 'Arial',
                 'fontSize': '15'
             }
-            //column graph of contest given
 
             var data2 = google.visualization.arrayToDataTable([
                 ['Contest', "total number of contest"],
@@ -343,17 +320,13 @@ form.addEventListener('submit', async function (e) {
                 legend: 'none',
                 series: {
                     0: { targetAxisIndex: 0 },
-                    // 1: {targetAxisIndex: 1}
                 },
                 title: 'Total contest given by both users',
                 vAxes: {
-                    // Adds titles to each axis.
                     0: { title: 'contests' },
-                    // 1: {title: 'user'}
                 },
                 vAxis: {
                     minValue: 0,
-                    // ticks: [0, .3, .6, .9, 1]
                 },
 
                 fontSize: 15,
@@ -373,8 +346,8 @@ form.addEventListener('submit', async function (e) {
 
             var data4 = new google.visualization.DataTable();
             data4.addColumn('date', 'label');
-            data4.addColumn('number', 'rating 1');
-            data4.addColumn('number', 'rating 2');
+            data4.addColumn('number', handle);
+            data4.addColumn('number', handle2);
             for (var x of labelR) {
                 data4.addRow([new Date(x * 1000), ratingUser[x], ratingUser2[x]]);
 
@@ -397,8 +370,8 @@ form.addEventListener('submit', async function (e) {
 
             var data5 = new google.visualization.DataTable();
             data5.addColumn('date', 'label');
-            data5.addColumn('number', 'rank 1');
-            data5.addColumn('number', 'rank 2');
+            data5.addColumn('number', handle);
+            data5.addColumn('number', handle2);
             for (var x of labelR) {
                 data5.addRow([new Date(x * 1000), rankArr[x], rankArr2[x]]);
             }
@@ -421,7 +394,6 @@ form.addEventListener('submit', async function (e) {
             for (var x in problemRating) {
                 data7.addRow([x, problemRating[x], problemRating2[x]]);
             }
-            //set options
             var option7 = {
                 'title': 'Problem Ratings',
                 'width': 600,
@@ -433,11 +405,9 @@ form.addEventListener('submit', async function (e) {
                 fontName: 'Arial'
 
             };
-            // Instantiate and draw our chart, passing in some options.
             var chart7 = new google.visualization.BarChart(document.getElementById('chart_7'));
             chart7.draw(data7, option7);
 
-            //column graph of solved problems by tag
             var data8 = new google.visualization.DataTable()
             data8.addColumn('string', 'Problem_Tag');
             data8.addColumn('number', `${handle}`);
@@ -452,18 +422,13 @@ form.addEventListener('submit', async function (e) {
                 'backgroundColor': '#DDDDDD',
                 series: {
                     0: { targetAxisIndex: 0 },
-                    // 1: {targetAxisIndex: 1}
                 },
-                title: 'Solver probelms acc to Tag',
+                title: 'Solved problems according to Tag',
                 vAxes: {
-                    // Adds titles to each axis.
-                    // minValue: 0,
                     0: { title: 'rating' },
-                    // 1: {title: 'user'}
                 },
                 vAxis: {
                     minValue: 0,
-                    // ticks: [0, .3, .6, .9, 1]
                 },
 
                 fontSize: 15,

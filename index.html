@@ -7,7 +7,7 @@
     <title>User Search</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -16,206 +16,203 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/stylesheets/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark container-fluid" style="background-color: #0d1d78;">
-        <a class="navbar-brand" href="#">Codeforces Guide</a>
+        <a class="navbar-brand" href="#">Codeforces Stalker</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="index.html">Analyze</span></a>
+                <a class="nav-item nav-link active" href="#">Analyze</span></a>
                 <a class="nav-item nav-link" href="compare.html">Compare</a>
-                <a class="nav-item nav-link" href="#">Extra</a>
+                <a class="nav-item nav-link" href="contestPicker.html">Contest Picker</a>
             </div>
         </div>
     </nav>
     <main>
-    <div class="container">
-        <div class="jumbotron text-center pt-5">
-            <h1>Codeforces User Search</h1>
-            <p>Check out your codeforces account here and have a detailed<br> overview about your performance</p>
-        </div>
-        <div class="pb-3 pt-3">
-            <form id="searchForm">
-                <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Codeforces Handle" name="query">
-                </div>
+        <div class="container">
+            <div class="jumbotron text-center pt-5">
+                <h1>Codeforces User Search</h1>
+                <p>Check out your codeforces account here and have a detailed<br> overview about your performance</p>
+            </div>
+            <div class="pb-3 pt-3">
+                <form id="searchForm">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" placeholder="Codeforces Handle" name="query">
+                    </div>
 
-                <div>
-                    <button class="btn btn-light">Submit</button>
-                </div>
-            </form>
-        </div>
-        <!--  -->
+                    <div>
+                        <button class="btn btn-light">Submit</button>
+                    </div>
+                </form>
+            </div>
 
-        <div id="vis" class="d-none">
-            <div class="m-5">
-                <div class="row">
-                    <div class="card pie2">
-                        <div class="card-body row">
-                            <div class="col-6 ">
-                                <img id="img1" style="width:100%; height: 100%">
+            <div id="vis" class="d-none">
+                <div class="m-5">
+                    <div class="row">
+                        <div class="card pie2">
+                            <div class="card-body row">
+                                <div class="col-6 ">
+                                    <img id="img1" style="width:100%; height: 100%">
+                                </div>
+                                <div class="col-6 giveColor">
+                                    <div id="rating" class="m-3 giveBold"></div>
+                                    <div id="friends" class="m-3 giveBold "></div>
+                                    <div id="contribution" class="m-3 giveBold"></div>
+                                    <div id="rank" class="m-3 giveBold"></div>
+                                </div>
                             </div>
-                            <div class="col-6 giveColor">
-                                 <div id="rating" class="m-3 giveBold"></div>
-                                 <div id="friends"class="m-3 giveBold "></div>
-                                 <div id="contribution" class="m-3 giveBold"></div>
-                                 <div id="rank" class="m-3 giveBold"></div>                   
-                            </div>    
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card pie1" id="card1">
-                        <div class="card-body">
-                            <div id="chart_1"></div>
+                    <div class="row">
+                        <div class="card pie1" id="card1">
+                            <div class="card-body">
+                                <div id="chart_1"></div>
+                            </div>
+                        </div>
+                        <div class="card pie1" id="card2">
+                            <div class="card-body">
+                                <div id="chart_2"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card pie1" id="card2">
-                        <div class="card-body">
-                            <div id="chart_2"></div>
+                    <div class="row">
+                        <div class="card pie2" id="card3">
+                            <div class="card-body">
+                                <div id="chart_3"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card pie2" id="card3">
-                        <div class="card-body">
-                            <div id="chart_3"></div>
+                    <div class="row">
+                        <div class="card m-2" id="card4" style="width: 100%;">
+                            <div class="card-body">
+                                <div id="chart_4"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card m-2" id="card4" style="width: 100%;">
-                        <div class="card-body">
-                            <div id="chart_4"></div>
+                    <div class="row">
+                        <div class="card m-2" id="card5" style="width: 100%;">
+                            <div class="card-body">
+                                <div id="chart_5"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card m-2" id="card5" style="width: 100%;">
-                        <div class="card-body">
-                            <div id="chart_5"></div>
+                    <div class="row">
+                        <div class="card graph1" id="card6">
+                            <div class="card-body">
+                                <div id="chart_6"></div>
+                            </div>
+                        </div>
+                        <div class="card graph1" id="card7">
+                            <div class="card-body">
+                                <div id="chart_7"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card graph1" id="card6">
-                        <div class="card-body">
-                            <div id="chart_6"></div>
-                        </div>
-                    </div>
-                    <div class="card graph1" id="card7">
-                        <div class="card-body">
-                            <div id="chart_7"></div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="bgColor card p-5">
-                        <h1>Strength and Weakness</h1>
-                        <table class="table container" id="table1">
-                            <thead>
-                                <tr>
-                                    <th>Strong Topics</th>
-                                    <th>Weak Topics</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="stng-1"></td>
-                                    <td id="weak-1"></td>
-                                </tr>
-                                <tr>
-                                    <td id="stng-2"></td>
-                                    <td id="weak-2"></td>
-                                </tr>
-                                <tr>
-                                    <td id="stng-3"></td>
-                                    <td id="weak-3"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        <div class="bgColor card p-5">
+                            <h1>Strength and Weakness</h1>
+                            <table class="table container" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Strong Topics</th>
+                                        <th>Weak Topics</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="stng-1"></td>
+                                        <td id="weak-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="stng-2"></td>
+                                        <td id="weak-2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="stng-3"></td>
+                                        <td id="weak-3"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="bgColor card p-5">
-                        <h1>Some Numbers</h1>
-                        <table class="table container" id="table2">
-                            <tbody>
-                                <tr>
-                                    <td>Problems Tried</th>
-                                    <td id="info-1"></td>
+                    <div class="row">
+                        <div class="bgColor card p-5">
+                            <h1>Some Numbers</h1>
+                            <table class="table container" id="table2">
+                                <tbody>
+                                    <tr>
+                                        <td>Problems Tried</th>
+                                        <td id="info-1"></td>
 
-                                </tr>
-                                <tr>
-                                    <td>Problems Solved</th>
-                                    <td id="info-2"></td>
-                                </tr>
-                                <tr>
-                                    <td>Average Attempts for Solving a Question</th>
-                                    <td id="info-3"></td>
-                                </tr>
-                                <tr>
-                                    <td>Solved With One Submission</th>
-                                    <td id="info-4"></td>
-                                </tr>
-                                <tr>
-                                    <td>Number of Contests Given</th>
-                                    <td id="info-5"></td>
-                                </tr>
-                                <tr>
-                                    <td>Best Rank</th>
-                                    <td id="info-6"></td>
-                                </tr>
-                                <tr>
-                                    <td>Worst Rank</th>
-                                    <td id="info-7"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </tr>
+                                    <tr>
+                                        <td>Problems Solved</th>
+                                        <td id="info-2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average Attempts for Solving a Question</th>
+                                        <td id="info-3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Solved With One Submission</th>
+                                        <td id="info-4"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of Contests Given</th>
+                                        <td id="info-5"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Best Rank</th>
+                                        <td id="info-6"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Worst Rank</th>
+                                        <td id="info-7"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card heatmap" id="card8">
-                        <div class="card-body">
-                            <div id="calendar_basic"></div>
+                    <div class="row">
+                        <div class="card heatmap" id="card8">
+                            <div class="card-body">
+                                <div id="calendar_basic"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
-    </div>
-</main>
- <footer id="footer">
+    </main>
+    <footer id="footer">
+        <div id="About_Us">About Us : We visualize your Competitive Programming progress!
+        </div>
+        <div class="fooltink"> Resources :
 
-
-             <div id="About_Us">About Us : We visualize your Competitive Programming progress! 
-             </div>
-             <div class="fooltink"> Resources : 
-                
-                      <a class="footlink" href="https://codeforces.com/" style="text-decoration:none"><img src="https://images.squarespace-cdn.com/content/v1/5a076df2268b966170809a2c/1511918009339-YOT20YA31EFYH71J55TQ/ke17ZwdGBToddI8pDm48kHuMSja0Vh8eB_h0MuaD_CRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwU8GNIaN2hBf1MRW24-pMWEs13LPVLeLgTsuCQQ6fIlIDXqTXNEBriE4Y9rQ8vzr4/codeforces_logo.png" style="width:100px;height:30px;"></a> 
-                      <a class="footlink" href="https://www.w3schools.com/" style="text-decoration:none"><img src="https://play-lh.googleusercontent.com/i-ij7KM2pFUUpFE31QAUDXg5mzGFNbm16S4tjmg2ZyuhCGLgNJ8oXJRbq7ysh6LoZg" style="width:30px;height:30px;"></a>
-                      <a class="footlink" href="https://www.geeksforgeeks.org/" style="text-decoration:none"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg" style="width:100px;height:30px;"></a>
-                      <a class="footlink" href="https://cp-algorithms.com/" style="text-decoration:none">CP-Algorithms</a> 
-                
-             </div>
-    </footer> 
-   
-
-    <script src="app.js"></script>
+            <a class="footlink" href="https://codeforces.com/" style="text-decoration:none"><img
+                    src="https://images.squarespace-cdn.com/content/v1/5a076df2268b966170809a2c/1511918009339-YOT20YA31EFYH71J55TQ/ke17ZwdGBToddI8pDm48kHuMSja0Vh8eB_h0MuaD_CRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwU8GNIaN2hBf1MRW24-pMWEs13LPVLeLgTsuCQQ6fIlIDXqTXNEBriE4Y9rQ8vzr4/codeforces_logo.png"
+                    style="width:100px;height:30px;"></a>
+            <a class="footlink" href="https://www.w3schools.com/" style="text-decoration:none"><img
+                    src="https://play-lh.googleusercontent.com/i-ij7KM2pFUUpFE31QAUDXg5mzGFNbm16S4tjmg2ZyuhCGLgNJ8oXJRbq7ysh6LoZg"
+                    style="width:30px;height:30px;"></a>
+            <a class="footlink" href="https://www.geeksforgeeks.org/" style="text-decoration:none"><img
+                    src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg"
+                    style="width:100px;height:30px;"></a>
+            <a class="footlink" href="https://cp-algorithms.com/" style="text-decoration:none">CP-Algorithms</a>
+        </div>
+    </footer>
+    <script src="assets/scripts/index.js"></script>
 </body>
 
 </html>

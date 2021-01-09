@@ -16,7 +16,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/styles.css">
 </head>
 
 <body>
@@ -30,148 +30,154 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="index.html">Analyze</span></a>
                 <a class="nav-item nav-link active" href="#">Compare</a>
-                <a class="nav-item nav-link" href="extra.html">Extra</a>
+                <a class="nav-item nav-link" href="contestPicker.html">Contest Picker</a>
             </div>
         </div>
     </nav>
-<main>
-    <div class="container">
-        <div class="jumbotron text-center pt-5">
-            <h1>Compare two user handles</h1>
-            <p>Enter two user handles to<br> compare and analyze the difference</p>
-        </div>
-        <div class="pb-3 pt-3">
-            <form id="searchForm1">
-                <div class="mb-3">
-                    <input class="form-control formMargin" type="text" placeholder="Enter 1st Handle" name="query">
-                    <input class="form-control formMargin" type="text" placeholder="Enter 2nd Handle" name="query2">
+    <main>
+        <div class="container">
+            <div class="jumbotron text-center pt-5">
+                <h1>Compare two user handles</h1>
+                <p>Enter two user handles to<br> compare and analyze the difference</p>
+            </div>
+            <div class="pb-3 pt-3">
+                <form id="searchForm1">
+                    <div class="mb-3">
+                        <input class="form-control formMargin" type="text" placeholder="Enter 1st Handle" name="query">
+                        <input class="form-control formMargin" type="text" placeholder="Enter 2nd Handle" name="query2">
+                    </div>
+
+                    <div>
+                        <button class="btn btn-light">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="vis" class="d-none">
+
+                <div class="m-5">
+
+                    <div class="row">
+                        <div class="card pie1" id="card1">
+                            <div class="card-body">
+                                <div id="chart_1"></div>
+                            </div>
+                        </div>
+                        <div class="card pie1" id="card2">
+                            <div class="card-body">
+                                <div id="chart_2"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div>
-                    <button class="btn btn-light">Submit</button>
+                <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_4"></div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-
-        <div id="vis" class="d-none">
-
-            <div class="m-5">
+                <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card m-auto" id="card5">
+                        <div class="card-body">
+                            <div id="chart_7"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card m-2" id="card4" style="width: 100%;">
+                        <div class="card-body">
+                            <div id="chart_8"></div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
-                    <div class="card pie1" id="card1">
-                        <div class="card-body">
-                            <div id="chart_1"></div>
-                        </div>
-                    </div>
-                    <div class="card pie1" id="card2">
-                        <div class="card-body">
-                            <div id="chart_2"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card m-2" id="card4" style="width: 100%;">
-                    <div class="card-body">
-                        <div id="chart_4"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card m-2" id="card4" style="width: 100%;">
-                    <div class="card-body">
-                        <div id="chart_5"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card m-auto" id="card5">
-                    <div class="card-body">
-                        <div id="chart_7"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card m-2" id="card4" style="width: 100%;">
-                    <div class="card-body">
-                        <div id="chart_8"></div>
+                    <div class="bgColor m-auto card p-5">
+                        <h1>Some Numbers</h1>
+                        <table class="table container" id="compareTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th id="handle1"></th>
+                                    <th id="handle2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Problems Tried</th>
+                                    <td id="tried1"></td>
+                                    <td id="tried2"></td>
+                                </tr>
+                                <tr>
+                                    <th>Problems Solved</th>
+                                    <td id="solved1"></td>
+                                    <td id="solved2"></td>
+                                </tr>
+                                <tr>
+                                    <th>Problems Unsolved</th>
+                                    <td id="unsolved1"></td>
+                                    <td id="unsolved2"></td>
+                                </tr>
+                                <tr>
+                                    <th>Average Attempts for Solving a Question</th>
+                                    <td id="avgAttempts1"></td>
+                                    <td id="avgAttempts2"></td>
+                                </tr>
+                                <tr>
+                                    <th>Questions solved with one Submission</th>
+                                    <td id="oneSub1"></td>
+                                    <td id="oneSub2"></td>
+                                </tr>
+                                <tr>
+                                    <th>Best Rank</th>
+                                    <td id="bestRank1"></td>
+                                    <td id="bestRank2"></td>
+                                </tr>
+                                <tr>
+                                    <th>Worst Rank</th>
+                                    <td id="worstRank1"></td>
+                                    <td id="worstRank2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="bgColor m-auto card p-5">
-                    <h1>Some Numbers</h1>
-                    <table class="table container" id="compareTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th id="handle1"></th>
-                                <th id="handle2"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>Problems Tried</th>
-                                <td id="tried1"></td>
-                                <td id="tried2"></td>
-                            </tr>
-                            <tr>
-                                <th>Problems Solved</th>
-                                <td id="solved1"></td>
-                                <td id="solved2"></td>
-                            </tr>
-                            <tr>
-                                <th>Problems Unsolved</th>
-                                <td id="unsolved1"></td>
-                                <td id="unsolved2"></td>
-                            </tr>
-                            <tr>
-                                <th>Average Attempts for Solving a Question</th>
-                                <td id="avgAttempts1"></td>
-                                <td id="avgAttempts2"></td>
-                            </tr>
-                            <tr>
-                                <th>Questions solved with one Submission</th>
-                                <td id="oneSub1"></td>
-                                <td id="oneSub2"></td>
-                            </tr>
-                            <tr>
-                                <th>Best Rank</th>
-                                <td id="bestRank1"></td>
-                                <td id="bestRank2"></td>
-                            </tr>
-                            <tr>
-                                <th>Worst Rank</th>
-                                <td id="worstRank1"></td>
-                                <td id="worstRank2"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+
         </div>
-
-
-    </div>
     </main>
-    
-     <footer id="footer">
+
+    <footer id="footer">
 
 
-             <div id="About_Us">About Us : We visualize your Competitive Programming progress! 
-             </div>
-             <div class="fooltink"> Resources : 
-                
-                      <a class="footlink" href="https://codeforces.com/" style="text-decoration:none"><img src="https://images.squarespace-cdn.com/content/v1/5a076df2268b966170809a2c/1511918009339-YOT20YA31EFYH71J55TQ/ke17ZwdGBToddI8pDm48kHuMSja0Vh8eB_h0MuaD_CRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwU8GNIaN2hBf1MRW24-pMWEs13LPVLeLgTsuCQQ6fIlIDXqTXNEBriE4Y9rQ8vzr4/codeforces_logo.png" style="width:100px;height:30px;"></a> 
-                      <a class="footlink" href="https://www.w3schools.com/" style="text-decoration:none"><img src="https://play-lh.googleusercontent.com/i-ij7KM2pFUUpFE31QAUDXg5mzGFNbm16S4tjmg2ZyuhCGLgNJ8oXJRbq7ysh6LoZg" style="width:30px;height:30px;"></a>
-                      <a class="footlink" href="https://www.geeksforgeeks.org/" style="text-decoration:none"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg" style="width:100px;height:30px;"></a>
-                      <a class="footlink" href="https://cp-algorithms.com/" style="text-decoration:none">CP-Algorithms</a> 
-                
-             </div>
-    </footer> 
-   
-    <script src="twoUsers.js"></script>
+        <div id="About_Us">About Us : We visualize your Competitive Programming progress!
+        </div>
+        <div class="fooltink"> Resources :
+
+            <a class="footlink" href="https://codeforces.com/" style="text-decoration:none"><img
+                    src="https://images.squarespace-cdn.com/content/v1/5a076df2268b966170809a2c/1511918009339-YOT20YA31EFYH71J55TQ/ke17ZwdGBToddI8pDm48kHuMSja0Vh8eB_h0MuaD_CRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwU8GNIaN2hBf1MRW24-pMWEs13LPVLeLgTsuCQQ6fIlIDXqTXNEBriE4Y9rQ8vzr4/codeforces_logo.png"
+                    style="width:100px;height:30px;"></a>
+            <a class="footlink" href="https://www.w3schools.com/" style="text-decoration:none"><img
+                    src="https://play-lh.googleusercontent.com/i-ij7KM2pFUUpFE31QAUDXg5mzGFNbm16S4tjmg2ZyuhCGLgNJ8oXJRbq7ysh6LoZg"
+                    style="width:30px;height:30px;"></a>
+            <a class="footlink" href="https://www.geeksforgeeks.org/" style="text-decoration:none"><img
+                    src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg"
+                    style="width:100px;height:30px;"></a>
+            <a class="footlink" href="https://cp-algorithms.com/" style="text-decoration:none">CP-Algorithms</a>
+
+        </div>
+    </footer>
+
+    <script src="assets/scripts/compare.js"></script>
 </body>
 
 </html>
