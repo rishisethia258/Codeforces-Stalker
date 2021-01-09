@@ -256,7 +256,7 @@ form.addEventListener('submit', async function (e) {
                 legend: 'none',
                 pieSliceText: 'label',
                 is3D: true,
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 'fontName': 'Arial',
                 'fontSize': '15'
             };
@@ -276,7 +276,7 @@ form.addEventListener('submit', async function (e) {
                 title: 'VERDICTS OF ' + handle,
                 legend: 'none',
                 is3D: true,
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 'fontName': 'Arial',
                 'fontSize': '15'
             };
@@ -296,7 +296,7 @@ form.addEventListener('submit', async function (e) {
                 height: Math.max(600, $('#card3').width()) * 0.75,
                 chartArea: { width: '80%', height: '70%' },
                 title: 'TAGS OF ' + handle,
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 pieSliceText: 'none',
                 legend: {
                     position: 'right',
@@ -326,7 +326,7 @@ form.addEventListener('submit', async function (e) {
                 height: $('#card1').width(),
                 title: 'RATING OVER TIME',
                 legend: 'none',
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 'fontName': 'Arial',
                 'fontSize': '15'
             };
@@ -345,7 +345,7 @@ form.addEventListener('submit', async function (e) {
                 height: $('#card1').width(),
                 title: 'RANK IN CONTESTS OVER TIME',
                 legend: 'none',
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 'fontName': 'Arial',
                 'fontSize': '15'
             };
@@ -365,7 +365,7 @@ form.addEventListener('submit', async function (e) {
                 width: Math.max(600, $('#card6').width()) * 0.8,
                 height: 900,
                 legend: 'none',
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 'fontName': 'Arial',
                 'fontSize': '15'
             };
@@ -386,7 +386,7 @@ form.addEventListener('submit', async function (e) {
                 width: Math.max(600, $('#card7').width()) * 0.8,
                 height: 900,
                 legend: 'none',
-                'backgroundColor': '#95a3f0',
+                'backgroundColor': '#DDDDDD',
                 'fontName': 'Arial',
                 'fontSize': '15'
             };
@@ -424,6 +424,10 @@ form.addEventListener('submit', async function (e) {
                 }
             };
             chart.draw(dataTable, options);
+
+            $(window).resize(function(){
+                drawChart();
+            });
 
         }
     } catch (error) {
