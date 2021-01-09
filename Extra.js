@@ -10,10 +10,10 @@ form.addEventListener('submit', async function (e) {
     var count=0;
     var Ids=[]
     const contests = await axios.get(`https://codeforces.com/api/contest.list?gym=false`);
-
-    for(var j in contests.data.result)
+    var len=contests.data.result.length;
+    for(var j=0;j<len;j++)
     {
-        var k=0;
+       var k=0;
        for(var i=0;i<userStatus1.data.result.length;i++)
       {
           if(userStatus1.data.result[i].contestId == contests.data.result[j].id) {
@@ -22,12 +22,15 @@ form.addEventListener('submit', async function (e) {
              //Ids[count]=userStatus;
              //if(count==10) break;
           }
+      }
+        if(k==0){
+        Ids[count]=contests.data.result[j].id;
+        count++;
         }
-        if(k==0){ Ids[count]=contests.data.result[j].id;
-        count++;}
-        if(count==10) break;
+        if(count==7) break;
     }
 
-    console.log(Ids);
+    // console.log(Ids);
+    // console.log(contests.data.result.length);
 
 });
