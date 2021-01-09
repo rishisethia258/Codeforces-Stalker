@@ -134,7 +134,9 @@ form.addEventListener('submit', async function (e) {
                 }
             }
         }
-        avgAttempts /= solved;
+        if (solved != 0) {
+            avgAttempts /= solved;
+        }
 
 
         for (i in tagAccuracy) {
