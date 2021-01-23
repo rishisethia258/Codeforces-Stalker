@@ -31,6 +31,7 @@ Check it out [here](https://rishisethia258.github.io/Codeforces-Stalker)
  We had an aim to make a webapp for people trying to master Competitive Programming. Here they can analyze and compare themselves with their friends. Also they can find a list mutually unattempted contests which they could give with virtual participation feature at codeforces.
  
 ## Future Prospects
+* Add profiles for various other competitive programming websites such as Codechef, Atcoder etc.
 * Recommend problems to users to work upon their weak areas.
 * Add Rating Predictor.
 * Add Animations to graphs.
